@@ -149,13 +149,7 @@ module.exports = {
   */
 
   /** rules 核心配置
-  * "camelcase": 2,
-  * "curly": 2,
-  * "brace-style": [2, "1tbs"],
-  * "quotes": [2, "single"],
-  * "semi": [2, "always"],
-  * "space-in-brackets": [2, "never"],
-  * "space-infix-ops": 2,
+  *   这里也许可以抽取一个精简版
   */
 
   "rules": {
