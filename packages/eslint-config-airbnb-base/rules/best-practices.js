@@ -37,7 +37,7 @@ module.exports = {
 
     // require the use of === and !==
     // http://eslint.org/docs/rules/eqeqeq
-    eqeqeq: ['error', 'allow-null'],
+    eqeqeq: ['error', 'always', { null: 'ignore' }],
 
     // make sure for-in loops have an if statement
     'guard-for-in': 'error',
@@ -186,10 +186,17 @@ module.exports = {
     }, {
       property: '__defineSetter__',
       message: 'Please use Object.defineProperty instead.',
+    }, {
+      object: 'Math',
+      property: 'pow',
+      message: 'Use the exponentiation operator (**) instead.',
     }],
 
     // disallow use of assignment in return statement
     'no-return-assign': 'error',
+
+    // disallow redundant `return await`
+    'no-return-await': 'error',
 
     // disallow use of `javascript:` urls.
     'no-script-url': 'error',
@@ -246,8 +253,17 @@ module.exports = {
     // disallow use of the with statement
     'no-with': 'error',
 
+    // require using Error objects as Promise rejection reasons
+    // http://eslint.org/docs/rules/prefer-promise-reject-errors
+    // TODO: enable, semver-major
+    'prefer-promise-reject-errors': ['off', { allowEmptyReject: true }],
+
     // require use of the second argument for parseInt()
     radix: 'error',
+
+    // require `await` in `async function` (note: this is a horrible rule that should never be used)
+    // http://eslint.org/docs/rules/require-await
+    'require-await': 'off',
 
     // requires to declare all vars on top of their containing scope
     'vars-on-top': 'error',
