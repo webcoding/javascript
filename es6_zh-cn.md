@@ -939,7 +939,7 @@ Other Style Guides
     ```
 
   <a name="functions--signature-invocation-indentation"></a>
-  - [7.15](#functions--signature-invocation-indentation) 多参函数声明或调用，书写规则: 每项独占一行，保持缩进, 且后面跟个逗号。
+  - [7.15](#functions--signature-invocation-indentation) 函数声明或调用参数写成多行时，书写规则: 每项独占一行，保持缩进，且后面跟个逗号。
 
     ```javascript
     // bad
