@@ -2,35 +2,23 @@
 
 # Airbnb JavaScript Style Guide() {
 
-*A mostly reasonable approach to JavaScript——用更合理的方式写 JavaScript*
+**A mostly reasonable approach to JavaScript——用更合理的方式写 JavaScript**
 
 翻译自 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 。
 
-NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 略有调整具体如下，
-
-- 尾逗号单行不要有，多行必须有。修改规则 `comma-dangle: ['error', 'never']` 中 never 改为 only-multiline，注意不是 always-multiline。
-- 行尾不要分号。调整后，代码更干净、整洁，但要注意 (, [, + , -, or ` 开头的语句，可能在“自动分号插入”机制（ASI）下会有问题。<br>
-  为什么? 参看[是否要分号的讨论](https://github.com/feross/standard/blob/master/RULES.md#helpful-reading)
-- 本文档有大量对 ES6 新特性规则要求，此外的书写要求兼容 [ES5 代码规范](http://standardjs.com/rules.html)。
-
-该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
-
 ES5 的编码规范请查看[版本一](https://github.com/webcoding/javascript-style-guide/tree/master/javascript-style-guide/es5_zh-cn_v1.md)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/javascript-style-guide/es5_zh-cn_v2.md)。
-ES6 的编码规范请查看下文(最新版)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/javascript-style-guide/es6_zh-cn_v2.md)
 
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb-base.svg)](https://www.npmjs.com/package/eslint-config-airbnb-base)
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Other Style Guides
-
  - [ES5 (Deprecated)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
  - [React](react/)
  - [CSS-in-JavaScript](css-in-javascript/)
  - [CSS & Sass](https://github.com/airbnb/css)
  - [CSS & Sass 中文版](https://github.com/webcoding/css-style-guide)
  - [Ruby](https://github.com/airbnb/ruby)
-
 
 <a name="table-of-contents"></a>
 ## 目录
@@ -45,7 +33,7 @@ Other Style Guides
   1. [箭头函数](#arrow-functions)
   1. [类 & 构造函数](#classes--constructors)
   1. [模块](#modules)
-  1. [Iterators and Generators](#iterators-and-generators)
+  1. [Iterators & Generators ](#iterators-and-generators)
   1. [属性](#properties)
   1. [变量](#variables)
   1. [提升](#hoisting)
@@ -61,7 +49,7 @@ Other Style Guides
   1. [事件](#events)
   1. [jQuery](#jquery)
   1. [ECMAScript 5 兼容性](#ecmascript-5-compatibility)
-  1. [ECMAScript 6+ (ES 2015+) 编码规范](#ecmascript-6-styles)
+  1. [ECMAScript 6 (ES 2015+) 编码规范](#ecmascript-6-styles)
   1. [测试](#testing)
   1. [性能](#performance)
   1. [资源](#resources)
@@ -71,7 +59,6 @@ Other Style Guides
   1. [一起来讨论 JavaScript](#chat-with-us-about-javascript)
   1. [Contributors](#contributors)
   1. [License](#license)
-
 
 <a name="types"></a>
 ##  类型 
@@ -111,7 +98,6 @@ Other Style Guides
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="references"></a>
 ## 引用
@@ -168,7 +154,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="objects"></a>
 ## 对象
 
@@ -183,7 +168,43 @@ Other Style Guides
     // good
     const item = {};
     ```
-  
+  ****************
+  - [3.2](#3.2) <a name='3.2'></a> 如果你的代码在浏览器环境下执行，别使用 [保留字](http://es5.github.io/#x7.6.1) 作为键值。这样的话在 IE8 不会运行。 [更多信息](https://github.com/airbnb/javascript/issues/61)。 但在 ES6 模块和服务器端中使用没有问题。
+
+    ```javascript
+    // bad
+    const superman = {
+      default: { clark: 'kent' },
+      private: true,
+    };
+
+    // good
+    const superman = {
+      defaults: { clark: 'kent' },
+      hidden: true,
+    };
+    ```
+
+  - [3.3](#3.3) <a name='3.3'></a> 使用同义词替换需要使用的保留字。
+
+    ```javascript
+    // bad
+    const superman = {
+      class: 'alien',
+    };
+
+    // bad
+    const superman = {
+      klass: 'alien',
+    };
+
+    // good
+    const superman = {
+      type: 'alien',
+    };
+    ```
+  *************
+
   <a name="es6-computed-properties"></a><a name="3.2"></a>
   - [3.2](#es6-computed-properties) 创建有动态属性名的对象时，使用可被计算的属性名称。
 
@@ -267,7 +288,7 @@ Other Style Guides
     // bad
     const obj = {
       episodeOne: 1,
-      twoJediWalkIntoACantina: 2,
+      twoJedisWalkIntoACantina: 2,
       lukeSkywalker,
       episodeThree: 3,
       mayTheFourth: 4,
@@ -279,14 +300,14 @@ Other Style Guides
       lukeSkywalker,
       anakinSkywalker,
       episodeOne: 1,
-      twoJediWalkIntoACantina: 2,
+      twoJedisWalkIntoACantina: 2,
       episodeThree: 3,
       mayTheFourth: 4,
     };
     ```
 
   <a name="objects--quoted-props"></a><a name="3.6"></a>
-  - [3.6](#objects--quoted-props) 只用引号包裹属性名称是无效标识符的那些。
+  - [3.6](#objects--quoted-props) Only quote properties that are invalid identifiers.
   eslint: [`quote-props`](http://eslint.org/docs/rules/quote-props.html) 
   jscs: [`disallowQuotedKeysInObjects`](http://jscs.info/rule/disallowQuotedKeysInObjects)
 
@@ -309,9 +330,9 @@ Other Style Guides
     ```
 
   <a name="objects--prototype-builtins"></a>
-  - [3.7](#objects--prototype-builtins) 不要直接调用 `Object.prototype` 的方法，如 `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`
+  - [3.7](#objects--prototype-builtins) Do not call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`.
 
-    > 为什么? 这些方法可能会有问题，比如 `{ hasOwnProperty: false }` 的情况 或者 可能是 null object (`Object.create(null)`).
+    > 为什么? These methods may be shadowed by properties on the object in question - consider `{ hasOwnProperty: false }` - or, the object may be a null object (`Object.create(null)`).
 
     ```javascript
     // bad
@@ -324,14 +345,12 @@ Other Style Guides
     const has = Object.prototype.hasOwnProperty; // cache the lookup once, in module scope.
     /* or */
     import has from 'has';
-    // ...
+    …
     console.log(has.call(object, key));
     ```
 
   <a name="objects--rest-spread"></a>
-  - [3.8](#objects--rest-spread) 浅拷贝使用对象扩展符（rest operator）更好，相对于方法 [`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 而言。
-
-    ???: 可以深拷贝么?
+  - [3.8](#objects--rest-spread) Prefer the object spread operator over [`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) to shallow-copy objects. Use the object rest operator to get a new object with certain properties omitted.
 
     ```javascript
     // very bad
@@ -350,45 +369,7 @@ Other Style Guides
     const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
     ```
 
-  - old: ES5 [3.11](#3.11) <a name='3.11'></a> 如果你的代码在浏览器环境下执行，不要使用 [保留字](http://es5.github.io/#x7.6.1) 作为键值。这样的话在 IE8 不会运行。 [更多信息](https://github.com/airbnb/javascript/issues/61)。 但在 ES6 模块和服务器端中使用没有问题。
-
-    NOTE: 这是 ES5 的要求，在浏览器端（目前情况下）仍要注意遵守此要求。
-
-    ```javascript
-    // bad
-    const superman = {
-      default: { clark: 'kent' },
-      private: true,
-    };
-
-    // good
-    const superman = {
-      defaults: { clark: 'kent' },
-      hidden: true,
-    };
-    ```
-
-  - old: ES5 [3.12](#3.12) <a name='3.12'></a> 使用同义词替换需要使用的保留字。
-
-    ```javascript
-    // bad
-    const superman = {
-      class: 'alien',
-    };
-
-    // bad
-    const superman = {
-      klass: 'alien',
-    };
-
-    // good
-    const superman = {
-      type: 'alien',
-    };
-    ```
-
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="arrays"></a>
 ## 数组
@@ -427,15 +408,15 @@ Other Style Guides
     const itemsCopy = [];
     let i;
 
-    for (i = 0; i < len; i += 1) {
+    for (i = 0; i < len; i++) {
       itemsCopy[i] = items[i];
     }
 
     // good
     const itemsCopy = [...items];
 
-    // old: ES5
-    // 当你需要拷贝数组时使用slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
+    // ES5 中，当你需要拷贝数组时使用slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
+    // old
     itemsCopy = items.slice();
     ```
 
@@ -446,8 +427,8 @@ Other Style Guides
     const foo = document.querySelectorAll('.foo');
     const nodes = Array.from(foo);
 
-    // old: ES5
-    // 使用slice将类数组的对象转成数组.
+    // ES5 中使用slice将类数组的对象转成数组.
+    // old
     function trigger() {
       var args = Array.prototype.slice.call(arguments);
       ...
@@ -505,7 +486,6 @@ Other Style Guides
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="destructuring"></a>
 ## 解构
@@ -581,7 +561,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="strings"></a>
 ## Strings
 
@@ -623,6 +602,7 @@ Other Style Guides
     // good
     const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
     ```
+
 
   <a name="es6-template-literals"></a><a name="6.3"></a>
   - [6.3](#es6-template-literals) 程序化生成字符串时，使用模板字符串代替字符串连接。
@@ -668,17 +648,15 @@ Other Style Guides
 
     // good
     const foo = '\'this\' is "quoted"';
-    const foo = `my name is '${name}'`;
+    const foo = `'this' is "quoted"`;
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="functions"></a>
 ## 函数
 
-  <a name="functions--declarations"></a><a name="7.1"></a>
-  - [7.1](#functions--declarations) 使用函数表达式，而不是函数声明。
+  - [7.1](#7.1) <a name='7.1'></a> 使用函数表达式，而不是函数声明。
   eslint: [`func-style`](http://eslint.org/docs/rules/func-style) 
   jscs: [`requireFunctionDeclarations`](http://jscs.info/rule/requireFunctionDeclarations)
 
@@ -687,19 +665,16 @@ Other Style Guides
     > 函数提升规则，使得[箭头函数](#arrow-functions)可以取代函数表达式。
 
     ```javascript
-    // bad
-    function foo() {
-      // ...
-    }
-
-    // bad
-    const foo = function () {
-      // ...
+    // bad 匿名函数表达式
+    var anonymous = function() () {
     };
 
+    // bad
+    function foo() {
+    }
+
     // good
-    const foo = function bar() {
-      // ...
+    const foo = function named() {
     };
     ```
 
@@ -708,13 +683,10 @@ Other Style Guides
   eslint: [`wrap-iife`](http://eslint.org/docs/rules/wrap-iife.html) 
   jscs: [`requireParenthesesAroundIIFE`](http://jscs.info/rule/requireParenthesesAroundIIFE)
 
-    > 为什么? 立即调用表达式(IIFE) 要使用圆括号包裹成一个独立的单元，这样表达更清晰。NOTE: 在模块的世界，你已经不再需要 IIFE 了。
-
     ```javascript
     // 立即调用的函数表达式 (IIFE)
     // 可使用箭头函数
-    // (() => {
-    (function () {
+    (() => {
       console.log('Welcome to the Internet. Please follow me.');
     }());
     ```
@@ -724,7 +696,7 @@ Other Style Guides
   eslint: [`no-loop-func`](http://eslint.org/docs/rules/no-loop-func.html)
 
   <a name="functions--note-on-blocks"></a><a name="7.4"></a>
-  - [7.4](#functions--note-on-blocks) NOTE: ECMA-262 把 `block` 定义为一组语句。函数声明不是语句。[阅读 ECMA-262 关于这个问题的说明](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97)。
+  - [7.4](#functions--note-on-blocks) **注意:** ECMA-262 把 `block` 定义为一组语句。函数声明不是语句。[阅读 ECMA-262 关于这个问题的说明](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97)。
 
     ```javascript
     // bad
@@ -748,13 +720,13 @@ Other Style Guides
 
     ```javascript
     // bad
-    function foo(name, options, arguments) {
-      // ...
+    function nope(name, options, arguments) {
+      // ...stuff...
     }
 
     // good
-    function foo(name, options, args) {
-      // ...
+    function yup(name, options, args) {
+      // ...stuff...
     }
     ```
 
@@ -801,7 +773,7 @@ Other Style Guides
 
     // good
     function handleThings(opts = {}) {
-      // ? 对比以上写法核心区别是啥？
+      // ? 对比以上写法区别是啥？参见 es6
       // ...
     }
     ```
@@ -879,12 +851,12 @@ Other Style Guides
     // bad
     function f1(obj) {
       obj.key = 1;
-    }
+    };
 
     // good
     function f2(obj) {
       const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
-    }
+    };
     ```
 
   <a name="functions--reassign-params"></a><a name="7.13"></a>
@@ -897,22 +869,18 @@ Other Style Guides
     // bad
     function f1(a) {
       a = 1;
-      // ...
     }
 
     function f2(a) {
       if (!a) { a = 1; }
-      // ...
     }
 
     // good
     function f3(a) {
       const b = a || 1;
-      // ...
     }
 
     function f4(a = 1) {
-      // ...
     }
     ```
 
@@ -932,47 +900,13 @@ Other Style Guides
     console.log(...x);
 
     // bad
-    new (Function.prototype.bind.apply(Date, [null, 2016, 8, 5]));
+    new (Function.prototype.bind.apply(Date, [null, 2016, 08, 05]));
 
     // good
-    new Date(...[2016, 8, 5]);
-    ```
-
-  <a name="functions--signature-invocation-indentation"></a>
-  - [7.15](#functions--signature-invocation-indentation) 多参函数声明或调用，书写规则: 每项独占一行，保持缩进, 且后面跟个逗号。
-
-    ```javascript
-    // bad
-    function foo(bar,
-                 baz,
-                 quux) {
-      // ...
-    }
-
-    // good
-    function foo(
-      bar,
-      baz,
-      quux,
-    ) {
-      // ...
-    }
-
-    // bad
-    console.log(foo,
-      bar,
-      baz);
-
-    // good
-    console.log(
-      foo,
-      bar,
-      baz,
-    );
+    new Date(...[2016, 08, 05]);
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="arrow-functions"></a>
 ## 箭头函数
@@ -1003,9 +937,9 @@ Other Style Guides
   <a name="arrows--implicit-return"></a><a name="8.2"></a>
   - [8.2](#arrows--implicit-return) 如果一个函数适合用一行写出并且只有一个参数，那就把花括号、圆括号和 `return` 都省略掉。如果不是，那就不要省略。
 
-    > 为什么? 这是语法糖。在链式调用中可读性很高。
+  > 为什么? 这是语法糖。在链式调用中可读性很高。
 
-    > 为什么不？当你打算回传一个对象的时候。
+  > 为什么不？当你打算回传一个对象的时候。
 
     ```javascript
     // bad
@@ -1025,7 +959,7 @@ Other Style Guides
 
     // good
     [1, 2, 3].map((number, index) => ({
-      [index]: number,
+      [index]: number
     }));
     ```
 
@@ -1034,11 +968,11 @@ Other Style Guides
 
     > 为什么? 这样能更清楚的看到开始和结束位置。
 
-    ```javascript
+    ```js
     // bad
     ['get', 'post', 'put'].map(httpMethod => Object.prototype.hasOwnProperty.call(
         httpMagicObjectWithAVeryLongName,
-        httpMethod,
+        httpMethod
       )
     );
 
@@ -1046,19 +980,19 @@ Other Style Guides
     ['get', 'post', 'put'].map(httpMethod => (
       Object.prototype.hasOwnProperty.call(
         httpMagicObjectWithAVeryLongName,
-        httpMethod,
+        httpMethod
       )
     ));
     ```
 
   <a name="arrows--one-arg-parens"></a><a name="8.4"></a>
-  - [8.4](#arrows--one-arg-parens) 如果函数需要一个参数就省略掉圆括号，否则总是用圆括号包裹参数，这样更清晰。NOTE: 总是使用圆括号也是可以接受的，但要设置在 ESLint 中用["always" option](http://eslint.org/docs/rules/arrow-parens#always)，jscs 中用[`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam) 
+  - [8.4](#arrows--one-arg-parens) 如果函数只有一个参数就不要使用圆括号，否则总是用圆括号包裹参数。
   eslint: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html) 
   jscs:  [`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam)
 
     > 为什么? 更少的视觉干扰
 
-    ```javascript
+    ```js
     // bad
     [1, 2, 3].map((x) => x * x);
 
@@ -1092,7 +1026,7 @@ Other Style Guides
   - [8.5](#arrows--confusing) 避免使用比较操作符 (`<=`, `>=`)，会混淆 箭头函数语法 (`=>`) 
   eslint: [`no-confusing-arrow`](http://eslint.org/docs/rules/no-confusing-arrow)
 
-    ```javascript
+    ```js
     // bad
     const itemHeight = item => item.height > 256 ? item.largeSize : item.smallSize;
 
@@ -1110,7 +1044,6 @@ Other Style Guides
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="classes--constructors"></a>
 ## 类 & 构造器
@@ -1148,7 +1081,7 @@ Other Style Guides
   <a name="constructors--extends"></a><a name="9.2"></a>
   - [9.2](#constructors--extends) 使用 `extends` 继承。
 
-    > 为什么? 因为 `extends` 是一个内建的原型继承方法并且不会破坏 `instanceof`。
+  > 为什么? 因为 `extends` 是一个内建的原型继承方法并且不会破坏 `instanceof`。
 
     ```javascript
     // bad
@@ -1159,7 +1092,7 @@ Other Style Guides
     inherits(PeekableQueue, Queue);
     PeekableQueue.prototype.peek = function () {
       return this.queue[0];
-    };
+    }
 
     // good
     class PeekableQueue extends Queue {
@@ -1282,16 +1215,14 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="modules"></a>
 ## 模块
 
   <a name="modules--use-them"></a><a name="10.1"></a>
   - [10.1](#modules--use-them) 总是使用模块 (`import`/`export`) 而不是其他非标准模块系统。你可以编译为你喜欢的模块系统。
 
-    > 为什么? 模块就是未来，让我们开始迈向未来吧。
-
-    > NOTE: 模块命名？（这个文件应该以驼峰命名，并在同名文件夹下，同时导出的时候名字一致）
+  > 为什么? 模块就是未来，让我们开始迈向未来吧。
+  > NOTE: 模块命名？（这个文件应该以驼峰命名，并在同名文件夹下，同时导出的时候名字一致）
 
     ```javascript
     // bad
@@ -1306,7 +1237,8 @@ Other Style Guides
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
 
-    // old: ES5 要注意
+    // ES5中要注意
+    // old
     // - 模块应该以 `!` 开始，这保证了如果一个有问题的模块忘记包含最后的分号在合并后不会出现错误
     // - 这个文件应该以驼峰命名，并在同名文件夹下，同时导出的时候名字一致
     // - 加入一个名为noConflict()的方法来设置导出的模块为之前的版本并返回它
@@ -1316,7 +1248,7 @@ Other Style Guides
   <a name="modules--no-wildcard"></a><a name="10.2"></a>
   - [10.2](#modules--no-wildcard) 不要使用通配符 import。
 
-    > 为什么? 这样能确保你只有一个默认 export。
+  > 为什么? 这样能确保你只有一个默认 export。
 
     ```javascript
     // bad
@@ -1329,7 +1261,7 @@ Other Style Guides
   <a name="modules--no-export-from-import"></a><a name="10.3"></a>
   - [10.3](#modules--no-export-from-import) 不要从 import 中直接 export。
 
-    > 为什么? 虽然一行代码简洁明了，但让 import 和 export 各司其职让事情能保持一致。
+  > 为什么? 虽然一行代码简洁明了，但让 import 和 export 各司其职让事情能保持一致。
 
     ```javascript
     // bad
@@ -1377,21 +1309,21 @@ Other Style Guides
 
     // bad
     let foo = 3;
-    export { foo };
+    export { foo }
 
     // good
     const foo = 3;
-    export { foo };
+    export { foo }
 
     // valid
-    export const count = 1;
-    export function getCount () {};
-    export class Counter {};
+    export const count = 1
+    export function getCount () {}
+    export class Counter {}
     ```
 
   <a name="modules--prefer-default-export"></a>
   - [10.6](#modules--prefer-default-export) 单出口模块，更倾向设置为默认出口。
-  eslint: [`import/prefer-default-export`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md)
+eslint: [`import/prefer-default-export`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md)
 
     ```javascript
     // bad
@@ -1403,7 +1335,7 @@ Other Style Guides
 
   <a name="modules--imports-first"></a>
   - [10.7](#modules--imports-first) 把所有的 `import` 语句放在其他语句上面
-  eslint: [`import/imports-first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/imports-first.md)
+eslint: [`import/imports-first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/imports-first.md)
     
     > 为什么? 把 `import` 提升, 保持将它们写在文件顶部是个好习惯。
 
@@ -1442,7 +1374,7 @@ Other Style Guides
 
   <a name="modules--no-webpack-loader-syntax"></a>
   - [10.9](#modules--no-webpack-loader-syntax) 不允许在 `import` 语句里包含 webpack 加载器语法。
-  eslint: [`import/no-webpack-loader-syntax`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-webpack-loader-syntax.md)
+eslint: [`import/no-webpack-loader-syntax`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-webpack-loader-syntax.md)
     
     > 为什么? 加载器语法要在 `webpack.config.js` 中使用
 
@@ -1457,7 +1389,6 @@ Other Style Guides
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="iterators-and-generators"></a>
 ## Iterators and Generators 迭代器 & 生成器
@@ -1487,25 +1418,12 @@ Other Style Guides
     // best (use the functional force)
     const sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
-
-    // bad
-    const increasedByOne = [];
-    for (let i = 0; i < numbers.length; i++) {
-      increasedByOne.push(numbers[i] + 1);
-    }
-
-    // good
-    const increasedByOne = [];
-    numbers.forEach(num => increasedByOne.push(num + 1));
-
-    // best (keeping it functional)
-    const increasedByOne = numbers.map(num => num + 1);
     ```
 
   <a name="generators--nope"></a><a name="11.2"></a>
   - [11.2](#generators--nope) 现在还不要使用生成器 generators。
 
-    > 为什么? 因为它们现在还没法很好地编译到 ES5。 (译者注：目前(2016/03) Chrome 和 Node.js 的稳定版本都已支持 generators)
+  > 为什么? 因为它们现在还没法很好地编译到 ES5。 (译者注：目前(2016/03) Chrome 和 Node.js 的稳定版本都已支持 generators)
 
   <a name="generators--spacing"></a>
   - [11.3](#generators--spacing) 如果你必须使用generators 或无视[generators 忠告](#generators--nope)，那么请务必确保函数签名(function*)是适当的间距。
@@ -1513,64 +1431,46 @@ Other Style Guides
 
     > 为什么? `function` and `*` 是同一个关键词的不同组成部分—— `*` 不是 `function` 修饰符, `function*` 是一种特定结构, 不同于 `function`。
 
-    ```javascript
+    ```js
     // bad
     function * foo() {
-      // ...
     }
 
-    // bad
     const bar = function * () {
-      // ...
-    };
-
-    // bad
-    const baz = function *() {
-      // ...
-    };
-
-    // bad
-    const quux = function*() {
-      // ...
-    };
-
-    // bad
-    function*foo() {
-      // ...
     }
 
-    // bad
+    const baz = function *() {
+    }
+
+    const quux = function*() {
+    }
+
+    function*foo() {
+    }
+
     function *foo() {
-      // ...
     }
 
     // very bad
     function
     *
     foo() {
-      // ...
     }
 
-    // very bad
     const wat = function
     *
     () {
-      // ...
-    };
-
-    // good
-    function* foo() {
-      // ...
     }
 
     // good
+    function* foo() {
+    }
+
     const foo = function* () {
-      // ...
-    };
+    }
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="properties"></a>
 ## 属性
@@ -1611,7 +1511,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="variables"></a>
 ## 变量
 
@@ -1630,8 +1529,7 @@ Other Style Guides
 
   <a name="variables--one-const"></a><a name="13.2"></a>
   - [13.2](#variables--one-const) 使用 `const` 声明每一个变量。
-  eslint: [`one-var`](http://eslint.org/docs/rules/one-var.html)
-  jscs: [`disallowMultipleVarDecl`](http://jscs.info/rule/disallowMultipleVarDecl)
+  eslint: [`one-var`](http://eslint.org/docs/rules/one-var.html) jscs: [`disallowMultipleVarDecl`](http://jscs.info/rule/disallowMultipleVarDecl)
 
     > 为什么? 增加新变量将更容易，而且你永远不用再担心调换错 `;` or `,` ，并且 diff 工具下更少干扰。同时在 debugger 时，可以单步调试而不会一次跳过他们所有变量。
 
@@ -1656,7 +1554,7 @@ Other Style Guides
   <a name="variables--const-let-group"></a><a name="13.3"></a>
   - [13.3](#variables--const-let-group) 将所有的 `const` 和 `let` 分组
 
-    > 为什么? 当你需要把已赋值变量赋值给未赋值变量时非常有用。
+  > 为什么? 当你需要把已赋值变量赋值给未赋值变量时非常有用。
 
     ```javascript
     // bad
@@ -1682,7 +1580,7 @@ Other Style Guides
   <a name="variables--define-where-used"></a><a name="13.4"></a>
   - [13.4](#variables--define-where-used) 在你需要的地方给变量赋值，但请把它们放在一个合理的位置。
 
-    > 为什么? `let` 和 `const` 是块级作用域而不是函数作用域。
+  > 为什么? `let` 和 `const` 是块级作用域而不是函数作用域。
   
     ```javascript
     // bad - unnecessary function call
@@ -1752,7 +1650,7 @@ Other Style Guides
     ```
 
   <a name="variables--unary-increment-decrement"></a><a name="13.6"></a>
-  - [13.6](#variables--unary-increment-decrement) 避免使用一元递增和递减操作 (++, --) 。
+  - [13.6](#variables--unary-increment-decrement) 便面使用一元递增和递减操作 (++, --) 。
   eslint [`no-plusplus`](http://eslint.org/docs/rules/no-plusplus)
 
     > 为什么? 一元递增和递减语句默认在自动分号插入处理下会有错误问题。而且它还会出现 `num += 1` 替代 `num ++` 的情况。不允许使用它们，也可以代码更健壮。
@@ -1760,14 +1658,14 @@ Other Style Guides
     ```javascript
       // bad
 
-      const array = [1, 2, 3];
+      let array = [1, 2, 3];
       let num = 1;
-      num++;
-      --num;
+      num ++;
+      -- num;
 
       let sum = 0;
       let truthyCount = 0;
-      for (let i = 0; i < array.length; i++) {
+      for(let i = 0; i < array.length; i++){
         let value = array[i];
         sum += value;
         if (value) {
@@ -1777,7 +1675,7 @@ Other Style Guides
 
       // good
 
-      const array = [1, 2, 3];
+      let array = [1, 2, 3];
       let num = 1;
       num += 1;
       num -= 1;
@@ -1787,7 +1685,6 @@ Other Style Guides
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="hoisting"></a>
 ## Hoisting
@@ -1803,7 +1700,7 @@ Other Style Guides
 
     // 由于变量提升的原因，
     // 在引用变量后再声明变量是可以运行的。
-    // NOTE: 变量赋值 `true` 的操作不会被提升。
+    // **注意:** 变量赋值 `true` 的操作不会被提升。
     function example() {
       console.log(declaredButNotAssigned); // => undefined
       var declaredButNotAssigned = true;
@@ -1865,7 +1762,7 @@ Other Style Guides
 
       var named = function named() {
         console.log('named');
-      };
+      }
     }
     ```
 
@@ -1887,7 +1784,6 @@ Other Style Guides
   - 想了解更多信息，参考 [Ben Cherry](http://www.adequatelygood.com/) 的 [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting)。
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="comparison-operators--equality"></a>
 ## 比较运算符 & 等号
@@ -1914,38 +1810,38 @@ Other Style Guides
     ```
 
   <a name="comparison--shortcuts"></a><a name="15.3"></a>
-  - [15.3](#comparison--shortcuts) 布尔值使用简写，明确使用数字和字符串比较除外。
+  - [15.3](#comparison--shortcuts) 使用简写。
 
     ```javascript
     // bad
     if (isValid === true) {
-      // ...
+      // ...stuff...
     }
 
     // good
     if (isValid) {
-      // ...
+      // ...stuff...
     }
 
     // bad
     if (name) {
-      // ...
+      // ...stuff...
     }
 
     // good
     if (name !== '') {
-      // ...
+      // ...stuff...
     }
 
     // bad
     if (collection.length) {
-      // ...
+      // ...stuff...
     }
 
     // good
     if (collection.length > 0) {
-      // 为什么用简写是 bad ???
-      // ...
+      // 为什么没用简写???
+      // ...stuff...
     }
     ```
 
@@ -1955,7 +1851,7 @@ Other Style Guides
   <a name="comparison--switch-blocks"></a><a name="15.5"></a>
   - [15.5](#comparison--switch-blocks) `case` 以及 `default` 情况下使用括号会创建块级作用域 (e.g. `let`, `const`, `function`, and `class`).
 
-    > 为什么? 变量声明在整个 `switch` 代码块中是可用的，但只有在执行到 `case` 并赋值时才初始化。多 `case` 中重复定义会导致问题。
+  > 为什么? 变量声明在整个 `switch` 代码块中是可用的，但只有在执行到 `case` 并赋值时才初始化。多 `case` 中重复定义会导致问题。
 
   eslint rules: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html).
 
@@ -1970,9 +1866,7 @@ Other Style Guides
         const y = 2;
         break;
       case 3:
-        function f() {
-          // ...
-        }
+        function f() {}
         break;
       default:
         class C {}
@@ -1989,9 +1883,7 @@ Other Style Guides
         break;
       }
       case 3: {
-        function f() {
-          // ...
-        }
+        function f() {}
         break;
       }
       case 4:
@@ -2004,7 +1896,7 @@ Other Style Guides
     ```
 
   <a name="comparison--nested-ternaries"></a><a name="15.6"></a>
-  - [15.6](#comparison--nested-ternaries) 不要嵌套使用三元表达式，要单个使用。
+  - [15.6](#comparison--nested-ternaries) 别嵌套使用三元表达式，要单个使用。
 
     eslint rules: [`no-nested-ternary`](http://eslint.org/docs/rules/no-nested-ternary.html).
 
@@ -2028,7 +1920,7 @@ Other Style Guides
     ```
 
   <a name="comparison--unneeded-ternary"></a><a name="15.7"></a>
-  - [15.7](#comparison--unneeded-ternary) 避免使用不必要的三元表达式
+  - [15.7](#comparison--unneeded-ternary) 避免不必要使用三元表达式
 
     eslint rules: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary.html).
 
@@ -2045,7 +1937,6 @@ Other Style Guides
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="blocks"></a>
 ## 代码块
@@ -2097,8 +1988,8 @@ Other Style Guides
     }
     ```
 
-**[⬆ 返回目录](#table-of-contents)**
 
+**[⬆ 返回目录](#table-of-contents)**
 
 <a name="comments"></a>
 ## 注释
@@ -2115,7 +2006,7 @@ Other Style Guides
     // @return {Element} element
     function make(tag) {
 
-      // ...
+      // ...stuff...
 
       return element;
     }
@@ -2130,7 +2021,7 @@ Other Style Guides
      */
     function make(tag) {
 
-      // ...
+      // ...stuff...
 
       return element;
     }
@@ -2151,7 +2042,7 @@ Other Style Guides
     function getType() {
       console.log('fetching type...');
       // set the default type to 'no type'
-      const type = this.type || 'no type';
+      const type = this._type || 'no type';
 
       return type;
     }
@@ -2161,7 +2052,7 @@ Other Style Guides
       console.log('fetching type...');
 
       // set the default type to 'no type'
-      const type = this.type || 'no type';
+      const type = this._type || 'no type';
 
       return type;
     }
@@ -2169,54 +2060,17 @@ Other Style Guides
     // also good
     function getType() {
       // set the default type to 'no type'
-      const type = this.type || 'no type';
+      const type = this._type || 'no type';
 
       return type;
     }
     ```
 
-  - [17.3](#comments--spaces) 注释以空格开始，这样更容易阅读。
-  eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
+  <a name="comments--actionitems"></a><a name="17.3"></a>
+  - [17.3](#comments--actionitems) 给注释增加 `FIXME` 或 `TODO` 的前缀可以帮助其他开发者快速了解这是一个需要复查的问题，或是给需要实现的功能提供一个解决方式。这将有别于常见的注释，因为它们是可操作的。使用 `FIXME -- need to figure this out` 或者 `TODO -- need to implement`。
 
-    ```javascript
-    // bad
-    //is current tab
-    const active = true;
-
-    // good
-    // is current tab
-    const active = true;
-
-    // bad
-    /**
-     *make() returns a new element
-     *based on the passed-in tag name
-     */
-    function make(tag) {
-
-      // ...
-
-      return element;
-    }
-
-    // good
-    /**
-     * make() returns a new element
-     * based on the passed-in tag name
-     */
-    function make(tag) {
-
-      // ...
-
-      return element;
-    }
-    ```
-
-  <a name="comments--actionitems"></a><a name="17.4"></a>
-  - [17.4](#comments--actionitems) 给注释增加 `FIXME` 或 `TODO` 的前缀可以帮助其他开发者快速了解这是一个需要复查的问题，或是给需要实现的功能提供一个解决方式。这将有别于常见的注释，因为它们是可操作的。使用 `FIXME -- need to figure this out` 或者 `TODO -- need to implement`。
-
-  <a name="comments--fixme"></a><a name="17.5"></a>
-  - [17.5](#comments--fixme) 使用 `// FIXME`: 标注问题。
+  <a name="comments--fixme"></a><a name="17.4"></a>
+  - [17.4](#comments--fixme) 使用 `// FIXME`: 标注问题。
 
     ```javascript
     class Calculator extends Abacus {
@@ -2230,7 +2084,7 @@ Other Style Guides
     ```
 
   <a name="comments--todo"></a><a name="17.5"></a>
-  - [17.6](#comments--todo) 使用 `// TODO`: 标注问题还需要解决。
+  - [17.5](#comments--todo) 使用 `// TODO`: 标注问题还需要解决。
 
     ```javascript
     class Calculator extends Abacus {
@@ -2245,7 +2099,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="whitespace"></a>
 ## 空白
 
@@ -2257,22 +2110,22 @@ Other Style Guides
     ```javascript
     // bad
     function foo() {
-    ∙∙∙∙let name;
+    ∙∙∙∙const name;
     }
 
     // bad
     function bar() {
-    ∙let name;
+    ∙const name;
     }
 
     // good
     function baz() {
-    ∙∙let name;
+    ∙∙const name;
     }
     ```
 
   <a name="whitespace--before-blocks"></a><a name="18.2"></a>
-  - [18.2](#whitespace--before-blocks) 在大括号前放一个空格。
+  - [18.2](#whitespace--before-blocks) 在花括号前放一个空格。
   eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html) 
   jscs: [`requireSpaceBeforeBlockStatements`](http://jscs.info/rule/requireSpaceBeforeBlockStatements)
 
@@ -2346,24 +2199,24 @@ Other Style Guides
 
     ```javascript
     // bad
-    import { es6 } from './AirbnbStyleGuide';
-      // ...
-    export default es6;
+    (function (global) {
+      // ...stuff...
+    })(this);
     ```
 
     ```javascript
     // bad
-    import { es6 } from './AirbnbStyleGuide';
-      // ...
-    export default es6;↵
+    (function (global) {
+      // ...stuff...
+    })(this);↵
     ↵
     ```
 
     ```javascript
     // good
-    import { es6 } from './AirbnbStyleGuide';
-      // ...
-    export default es6;↵
+    (function (global) {
+      // ...stuff...
+    })(this);↵
     ```
 
   <a name="whitespace--chains"></a><a name="18.6"></a>
@@ -2393,7 +2246,7 @@ Other Style Guides
     // bad
     const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
         .attr('width', (radius + margin) * 2).append('svg:g')
-        .attr('transform', `translate(${radius + margin},${radius + margin})`)
+        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
 
     // good
@@ -2403,7 +2256,7 @@ Other Style Guides
         .classed('led', true)
         .attr('width', (radius + margin) * 2)
       .append('svg:g')
-        .attr('transform', `translate(${radius + margin},${radius + margin})`)
+        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
     
     // good
@@ -2470,9 +2323,7 @@ Other Style Guides
     ```
 
   <a name="whitespace--padded-blocks"></a><a name="18.8"></a>
-  - [18.8](#whitespace--padded-blocks) 不要使用空白行紧邻块作用域填充空间。
-  eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html) 
-  jscs:  [`disallowPaddingNewlinesInBlocks`](http://jscs.info/rule/disallowPaddingNewlinesInBlocks)
+  - [18.8](#whitespace--padded-blocks) Do not pad your blocks with blank lines. eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html) jscs:  [`disallowPaddingNewlinesInBlocks`](http://jscs.info/rule/disallowPaddingNewlinesInBlocks)
 
     ```javascript
     // bad
@@ -2505,9 +2356,7 @@ Other Style Guides
     ```
 
   <a name="whitespace--in-parens"></a><a name="18.9"></a>
-  - [18.9](#whitespace--in-parens) 不要在圆括号（parentheses）内侧两边填充空格，如函数调用、条件判断等。
-  eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) 
-  jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
+  - [18.9](#whitespace--in-parens) Do not add spaces inside parentheses. eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
 
     ```javascript
     // bad
@@ -2532,9 +2381,7 @@ Other Style Guides
     ```
 
   <a name="whitespace--in-brackets"></a><a name="18.10"></a>
-  - [18.10](#whitespace--in-brackets) 不要在中括号（brackets）内侧左右两边填充空格。
-  eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html) 
-  jscs: [`disallowSpacesInsideArrayBrackets`](http://jscs.info/rule/disallowSpacesInsideArrayBrackets)
+  - [18.10](#whitespace--in-brackets) Do not add spaces inside brackets. eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html) jscs: [`disallowSpacesInsideArrayBrackets`](http://jscs.info/rule/disallowSpacesInsideArrayBrackets)
 
     ```javascript
     // bad
@@ -2547,9 +2394,7 @@ Other Style Guides
     ```
 
   <a name="whitespace--in-braces"></a><a name="18.11"></a>
-  - [18.11](#whitespace--in-braces) 在大括号（curly braces）内侧两边添加空格。
-  eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html) 
-  jscs: [`requireSpacesInsideObjectBrackets`](http://jscs.info/rule/requireSpacesInsideObjectBrackets)
+  - [18.11](#whitespace--in-braces) Add spaces inside curly braces. eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html) jscs: [`requireSpacesInsideObjectBrackets`](http://jscs.info/rule/requireSpacesInsideObjectBrackets)
 
     ```javascript
     // bad
@@ -2560,11 +2405,9 @@ Other Style Guides
     ```
 
   <a name="whitespace--max-len"></a><a name="18.12"></a>
-  - [18.12](#whitespace--max-len) 避免一行代码过长，超过100个字符（包括空格）。Note: 参看 [strings--line-length](#strings--line-length)，过长字符应该分行处理。
-  eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html) 
-  jscs: [`maximumLineLength`](http://jscs.info/rule/maximumLineLength)
+  - [18.12](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html) jscs: [`maximumLineLength`](http://jscs.info/rule/maximumLineLength)
 
-    > 为什么? 为了确保可读性、可维护性。注：作为一个良好的习惯，虽然显示器界面越来越大了，但代码为了通用性维护，如 shell 内也可以修改维护，那么有必要处理过长代码段。
+    > Why? This ensures readability and maintainability.
 
     ```javascript
     // bad
@@ -2593,11 +2436,10 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="commas"></a>
 ## 逗号
 
-  <a name="commas--leading-trailing"></a><a name="19.1"></a>
+<a name="commas--leading-trailing"></a><a name="19.1"></a>
   - [19.1](#commas--leading-trailing) 行首逗号：**不需要**。
   eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html) 
   jscs: [`requireCommaBeforeLineBreak`](http://jscs.info/rule/requireCommaBeforeLineBreak)
@@ -2639,7 +2481,7 @@ Other Style Guides
   eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) 
   jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
 
-    > 为什么? 这会让 git diffs 更干净。另外，像 babel 这样的转译器会移除结尾多余的逗号，也就是说你不必担心老旧浏览器的[尾逗号问题](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas)。
+  > 为什么? 这会让 git diffs 更干净。另外，像 babel 这样的转译器会移除结尾多余的逗号，也就是说你不必担心老旧浏览器的[尾逗号问题](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas)。
 
     ```javascript
     // bad - git diff without trailing comma
@@ -2656,9 +2498,7 @@ Other Style Guides
          lastName: 'Nightingale',
     +    inventorOf: ['coxcomb chart', 'modern nursing'],
     };
-    ```
 
-    ```javascript
     // bad
     const hero = {
       firstName: 'Dana',
@@ -2680,61 +2520,9 @@ Other Style Guides
       'Batman',
       'Superman',
     ];
-
-    // bad
-    function createHero(
-      firstName,
-      lastName,
-      inventorOf
-    ) {
-      // does nothing
-    }
-
-    // good
-    function createHero(
-      firstName,
-      lastName,
-      inventorOf,
-    ) {
-      // does nothing
-    }
-
-    // good (note that a comma must not appear after a "rest" element)
-    // NOTE: rest 元素后不能出现逗号
-    function createHero(
-      firstName,
-      lastName,
-      inventorOf,
-      ...heroArgs
-    ) {
-      // does nothing
-    }
-
-    // bad
-    createHero(
-      firstName,
-      lastName,
-      inventorOf
-    );
-
-    // good
-    createHero(
-      firstName,
-      lastName,
-      inventorOf,
-    );
-
-    // good (note that a comma must not appear after a "rest" element)
-    createHero(
-      firstName,
-      lastName,
-      inventorOf,
-      ...heroArgs
-    );
     ```
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="semicolons"></a>
 ## 分号
@@ -2757,27 +2545,25 @@ Other Style Guides
       return name;
     }());
 
-    // good (防止函数在两个 IIFE 串联时其中一个被错误当成另一个的参数处理)
-    // NOTE: 箭头函数参数省略，使用圆括号包裹处理
-    ;((() => {
+    // good (防止函数在两个 IIFE 合并时被当成一个参数)
+    ;(() => {
       const name = 'Skywalker';
       return name;
-    })());
+    }());
     ```
 
     [Read more](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="type-casting--coercion"></a>
 ## 类型转换
 
   <a name="coercion--explicit"></a><a name="21.1"></a>
-  - [21.1](#coercion--explicit) 在语句开头执行类型转换。
+  - [21.1](#coercion--explicit) 在语句开始时执行类型转换。
 
   <a name="coercion--strings"></a><a name="21.2"></a>
-  - [21.2](#coercion--strings) 处理字符串：
+  - [21.2](#coercion--strings) 字符串：
 
     ```javascript
     // => this.reviewScore = 9;
@@ -2793,7 +2579,7 @@ Other Style Guides
     ```
 
   <a name="coercion--numbers"></a><a name="21.3"></a>
-  - [21.3](#coercion--numbers) 处理数字：使用 `Number` 转换数字类型，而使用 `parseInt` 转换时，总是带着类型转换的基数。
+  - [21.3](#coercion--numbers) 数字：对数字使用 `parseInt` 转换，并带上类型转换的基数。
   eslint: [`radix`](http://eslint.org/docs/rules/radix)
 
     ```javascript
@@ -2831,16 +2617,16 @@ Other Style Guides
     ```
 
   <a name="coercion--bitwise"></a><a name="21.5"></a>
-  - [21.5](#coercion--bitwise) NOTE: 小心使用位操作运算符。数字会被当成 [64 位值](http://es5.github.io/#x4.3.19)，但是位操作运算符总是返回 32 位的整数（[参考](http://es5.github.io/#x11.7)）。位操作处理大于 32 位的整数值时还会导致意料之外的行为。[关于这个问题的讨论](https://github.com/airbnb/javascript/issues/109)。最大的 32 位整数是 2,147,483,647：
+  - [21.5](#coercion--bitwise) **注意:** 小心使用位操作运算符。数字会被当成 [64 位值](http://es5.github.io/#x4.3.19)，但是位操作运算符总是返回 32 位的整数（[参考](http://es5.github.io/#x11.7)）。位操作处理大于 32 位的整数值时还会导致意料之外的行为。[关于这个问题的讨论](https://github.com/airbnb/javascript/issues/109)。最大的 32 位整数是 2,147,483,647：
 
     ```javascript
-    2147483647 >> 0; // => 2147483647
-    2147483648 >> 0; // => -2147483648
-    2147483649 >> 0; // => -2147483647
+    2147483647 >> 0 //=> 2147483647
+    2147483648 >> 0 //=> -2147483648
+    2147483649 >> 0 //=> -2147483647
     ```
 
   <a name="coercion--booleans"></a><a name="21.6"></a>
-  - [21.6](#coercion--booleans) 处理布尔值:
+  - [21.6](#coercion--booleans) 布尔运算:
 
     ```javascript
     const age = 0;
@@ -2857,7 +2643,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="naming-conventions"></a>
 ## 命名规则
 
@@ -2868,12 +2653,12 @@ Other Style Guides
     ```javascript
     // bad
     function q() {
-      // ...
+      // ...stuff...
     }
 
     // good
     function query() {
-      // ...
+      // ..stuff..
     }
     ```
 
@@ -3009,7 +2794,6 @@ Other Style Guides
 
     ```javascript
     function makeStyleGuide() {
-      // ...
     }
 
     export default makeStyleGuide;
@@ -3021,45 +2805,13 @@ Other Style Guides
     ```javascript
     const AirbnbStyleGuide = {
       es6: {
-      },
+      }
     };
 
     export default AirbnbStyleGuide;
     ```
 
-  <a name="naming--Acronyms-and-Initialisms"></a>
-  - [22.9](#naming--Acronyms-and-Initialisms) 缩写词要么全大写，要么全小写。
-
-    > 为什么? 名字的目的是提升可读性，而不是给电脑算法的。
-
-    ```javascript
-    // bad
-    import SmsContainer from './containers/SmsContainer';
-
-    // bad
-    const HttpRequests = [
-      // ...
-    ];
-
-    // good
-    import SMSContainer from './containers/SMSContainer';
-
-    // good
-    const HTTPRequests = [
-      // ...
-    ];
-
-    // best
-    import TextMessageContainer from './containers/TextMessageContainer';
-
-    // best
-    const Requests = [
-      // ...
-    ];
-    ```
-
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="accessors"></a>
 ## 存取器
@@ -3095,7 +2847,7 @@ Other Style Guides
     ```
 
   <a name="accessors--boolean-prefix"></a><a name="23.3"></a>
-  - [23.3](#accessors--boolean-prefix) 如果属性/方法是布尔值，使用 `isVal()` 或 `hasVal()` 来处理。
+  - [23.3](#accessors--boolean-prefix) 如果属性或方法是布尔值，使用 `isVal()` 或 `hasVal()` 判断。
 
     ```javascript
     // bad
@@ -3131,7 +2883,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="events"></a>
 ## 事件
 
@@ -3142,7 +2893,7 @@ Other Style Guides
     // bad
     $(this).trigger('listingUpdated', listing.id);
 
-    // ...
+    ...
 
     $(this).on('listingUpdated', (e, listingId) => {
       // do something with listingId
@@ -3155,15 +2906,14 @@ Other Style Guides
     // good
     $(this).trigger('listingUpdated', { listingId: listing.id });
 
-    // ...
+    ...
 
     $(this).on('listingUpdated', (e, data) => {
       // do something with data.listingId
     });
     ```
 
-**[⬆ 返回目录](#table-of-contents)**
-
+  **[⬆ 返回目录](#table-of-contents)**
 
 ## jQuery
 
@@ -3190,10 +2940,10 @@ Other Style Guides
     function setSidebar() {
       $('.sidebar').hide();
 
-      // ...
+      // ...stuff...
 
       $('.sidebar').css({
-        'background-color': 'pink',
+        'background-color': 'pink'
       });
     }
 
@@ -3202,10 +2952,10 @@ Other Style Guides
       const $sidebar = $('.sidebar');
       $sidebar.hide();
 
-      // ...
+      // ...stuff...
 
       $sidebar.css({
-        'background-color': 'pink',
+        'background-color': 'pink'
       });
     }
     ```
@@ -3242,7 +2992,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="ecmascript-5-compatibility"></a>
 ## ECMAScript 5 兼容性
 
@@ -3278,12 +3027,11 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="testing"></a>
-## 自动化测试
+## 测试
 
   <a name="testing--yup"></a><a name="28.1"></a>
-  - [28.1](#testing--yup) 需要吗？**Yup.**
+  - [28.1](#testing--yup) **Yup.**
 
     ```javascript
     function foo() {
@@ -3303,7 +3051,6 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 <a name="performance"></a>
 ## 性能
 
@@ -3318,7 +3065,6 @@ Other Style Guides
   - Loading...
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 <a name="resources"></a>
 ## 资源
@@ -3403,12 +3149,10 @@ Other Style Guides
 
 **[⬆ 返回目录](#table-of-contents)**
 
-
 ## <a name="in-the-wild">使用人群</a>
 
   This is a list of organizations that are using this style guide. Send us a pull request and we'll add you to the list.
 
-  - **3blades**: [3Blades/javascript](https://github.com/3blades/javascript)
   - **4Catalyzer**: [4Catalyzer/javascript](https://github.com/4Catalyzer/javascript)
   - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
   - **Adult Swim**: [adult-swim/javascript](https://github.com/adult-swim/javascript)
@@ -3417,11 +3161,9 @@ Other Style Guides
   - **Ascribe**: [ascribe/javascript](https://github.com/ascribe/javascript)
   - **Avalara**: [avalara/javascript](https://github.com/avalara/javascript)
   - **Avant**: [avantcredit/javascript](https://github.com/avantcredit/javascript)
-  - **BashPros**: [BashPros/javascript](https://github.com/BashPros/javascript)
   - **Billabong**: [billabong/javascript](https://github.com/billabong/javascript)
   - **Bisk**: [bisk/javascript](https://github.com/Bisk/javascript/)
   - **Blendle**: [blendle/javascript](https://github.com/blendle/javascript)
-  - **Bonhomme**: [bonhommeparis/javascript](https://github.com/bonhommeparis/javascript)
   - **Brainshark**: [brainshark/javascript](https://github.com/brainshark/javascript)
   - **Chartboost**: [ChartBoost/javascript-style-guide](https://github.com/ChartBoost/javascript-style-guide)
   - **ComparaOnline**: [comparaonline/javascript](https://github.com/comparaonline/javascript-style-guide)
@@ -3462,13 +3204,12 @@ Other Style Guides
   - **National Geographic**: [natgeo/javascript](https://github.com/natgeo/javascript)
   - **National Park Service**: [nationalparkservice/javascript](https://github.com/nationalparkservice/javascript)
   - **Nimbl3**: [nimbl3/javascript](https://github.com/nimbl3/javascript)
-  - **Nulogy**: [nulogy/javascript](https://github.com/nulogy/javascript)
   - **Orion Health**: [orionhealth/javascript](https://github.com/orionhealth/javascript)
   - **OutBoxSoft**: [OutBoxSoft/javascript](https://github.com/OutBoxSoft/javascript)
   - **Peerby**: [Peerby/javascript](https://github.com/Peerby/javascript)
   - **Razorfish**: [razorfish/javascript-style-guide](https://github.com/razorfish/javascript-style-guide)
   - **reddit**: [reddit/styleguide/javascript](https://github.com/reddit/styleguide/tree/master/javascript)
-  - **React**: [facebook.github.io/react/contributing/how-to-contribute.html#style-guide](https://facebook.github.io/react/contributing/how-to-contribute.html#style-guide)
+  - **React**: [/facebook/react/blob/master/CONTRIBUTING.md#style-guide](https://github.com/facebook/react/blob/master/CONTRIBUTING.md#style-guide)
   - **REI**: [reidev/js-style-guide](https://github.com/rei/code-style-guides/blob/master/docs/javascript.md)
   - **Ripple**: [ripple/javascript-style-guide](https://github.com/ripple/javascript-style-guide)
   - **SeekingAlpha**: [seekingalpha/javascript-style-guide](https://github.com/seekingalpha/javascript-style-guide)
@@ -3477,7 +3218,6 @@ Other Style Guides
   - **StratoDem Analytics**: [stratodem/javascript](https://github.com/stratodem/javascript)
   - **SteelKiwi Development**: [steelkiwi/javascript](https://github.com/steelkiwi/javascript)
   - **StudentSphere**: [studentsphere/javascript](https://github.com/studentsphere/guide-javascript)
-  - **SwoopApp**: [swoopapp/javascript](https://github.com/swoopapp/javascript)
   - **SysGarage**: [sysgarage/javascript-style-guide](https://github.com/sysgarage/javascript-style-guide)
   - **Syzygy Warsaw**: [syzygypl/javascript](https://github.com/syzygypl/javascript)
   - **Target**: [target/javascript](https://github.com/target/javascript)
@@ -3491,7 +3231,6 @@ Other Style Guides
   - **ZocDoc**: [ZocDoc/javascript](https://github.com/ZocDoc/javascript)
 
 **[⬆ 返回目录](#table-of-contents)**
-
 
 ## <a name="translation">翻译</a>
 
