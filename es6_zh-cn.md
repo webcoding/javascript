@@ -8,15 +8,32 @@
 
 NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 略有调整具体如下，
 
-- 尾逗号单行不要有，多行必须有。修改规则 `comma-dangle: ['error', 'never']` 中 never 改为 only-multiline，注意不是 always-multiline。
+- 尾逗号单行不要有，多行必须有。修改规则 `comma-dangle: ['error', 'never']` 中 never 改为 always-multiline。
 - 行尾不要分号。调整后，代码更干净、整洁，但要注意 (, [, + , -, or ` 开头的语句，可能在“自动分号插入”机制（ASI）下会有问题。<br>
   为什么? 参看[是否要分号的讨论](https://github.com/feross/standard/blob/master/RULES.md#helpful-reading)
-- 本文档有大量对 ES6 新特性规则要求，此外的书写要求兼容 [ES5 代码规范](http://standardjs.com/rules.html)。
+- 本文档有大量对 ES6 新特性规则要求，此外的书写要求兼容 [ES5 代码规范](http://standardjs.com/rules.html)。以下是一些空白相关的部分
+  - 不要行尾空格
+  - 文档底部保留一个空行
+  - 空白行不要字符
+  - 最多可以连续使用两个空白行
 
 该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
 
 ES5 的编码规范请查看[版本一](https://github.com/webcoding/javascript-style-guide/tree/master/javascript-style-guide/es5_zh-cn_v1.md)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/javascript-style-guide/es5_zh-cn_v2.md)。
 ES6 的编码规范请查看下文(最新版)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/javascript-style-guide/es6_zh-cn_v2.md)
+
+## Usage
+
+```
+# 安装依赖到全局，就不用每个项目单独安装了
+# standard: npm install -g eslint-config-standard eslint-plugin-standard eslint-plugin-promise
+# airbnb: npm install -g eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-airbnb
+# 推荐使用 airbnb，目前稍有改动，具体详见[.eslintrc](./.eslintrc)
+
+# 测试配置效果，可以参看文档用例，使用 test.js 集中测试，可以保留用例
+```
+
+NOTE: 使用规范最好的方式，就是配置好，直接用，然后各种问题就出来了
 
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb-base.svg)](https://www.npmjs.com/package/eslint-config-airbnb-base)
@@ -74,7 +91,7 @@ Other Style Guides
 
 
 <a name="types"></a>
-##  类型 
+##  类型
 
   <a name="types--primitives"></a><a name="1.1"></a>
   - [1.1](#types--primitives) **基本类型**: 直接存取基本类型。
@@ -134,7 +151,7 @@ Other Style Guides
 
   <a name="references--disallow-var"></a><a name="2.2"></a>
   - [2.2](#references--disallow-var) 如果你一定需要可变动的引用，使用 `let` 代替 `var`。
-  eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) 
+  eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html)
   jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
 
     > 为什么? 因为 `let` 是块级作用域，而 `var` 是函数作用域。
@@ -183,7 +200,7 @@ Other Style Guides
     // good
     const item = {};
     ```
-  
+
   <a name="es6-computed-properties"></a><a name="3.2"></a>
   - [3.2](#es6-computed-properties) 创建有动态属性名的对象时，使用可被计算的属性名称。
 
@@ -211,7 +228,7 @@ Other Style Guides
 
   <a name="es6-object-shorthand"></a><a name="3.5"></a>
   - [3.3](#es6-object-shorthand) 使用对象方法的简写。
-  eslint: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html) 
+  eslint: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html)
   jscs: [`requireEnhancedObjectLiterals`](http://jscs.info/rule/requireEnhancedObjectLiterals)
 
     ```javascript
@@ -236,7 +253,7 @@ Other Style Guides
 
   <a name="es6-object-concise"></a><a name="3.6"></a>
   - [3.4](#es6-object-concise) 使用对象属性值的简写。
-  eslint: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html) 
+  eslint: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html)
   jscs: [`requireEnhancedObjectLiterals`](http://jscs.info/rule/requireEnhancedObjectLiterals)
 
     > 为什么? 因为这样更短更有描述性。
@@ -287,7 +304,7 @@ Other Style Guides
 
   <a name="objects--quoted-props"></a><a name="3.6"></a>
   - [3.6](#objects--quoted-props) 只用引号包裹属性名称是无效标识符的那些。
-  eslint: [`quote-props`](http://eslint.org/docs/rules/quote-props.html) 
+  eslint: [`quote-props`](http://eslint.org/docs/rules/quote-props.html)
   jscs: [`disallowQuotedKeysInObjects`](http://jscs.info/rule/disallowQuotedKeysInObjects)
 
     > 为什么? 通常我认为这样更容易阅读，这样可以使用语法高亮并且许多 js 引擎也更容易优化代码。
@@ -511,7 +528,7 @@ Other Style Guides
 ## 解构
 
   <a name="destructuring--object"></a><a name="5.1"></a>
-  - [5.1](#destructuring--object) 使用解构存取和使用多属性对象。 
+  - [5.1](#destructuring--object) 使用解构存取和使用多属性对象。
   jscs: [`requireObjectDestructuring`](http://jscs.info/rule/requireObjectDestructuring)
 
     > 为什么? 因为解构能减少临时引用属性。
@@ -538,7 +555,7 @@ Other Style Guides
     ```
 
   <a name="destructuring--array"></a><a name="5.2"></a>
-  - [5.2](#destructuring--array) 对数组使用解构赋值。 
+  - [5.2](#destructuring--array) 对数组使用解构赋值。
   jscs: [`requireArrayDestructuring`](http://jscs.info/rule/requireArrayDestructuring)
 
     ```javascript
@@ -553,9 +570,9 @@ Other Style Guides
     ```
 
   <a name="destructuring--object-over-array"></a><a name="5.3"></a>
-  - [5.3](#destructuring--object-over-array) 需要回传多个值时，使用对象解构，而不是数组解构。 
+  - [5.3](#destructuring--object-over-array) 需要回传多个值时，使用对象解构，而不是数组解构。
   jscs: [`disallowArrayDestructuringReturn`](http://jscs.info/rule/disallowArrayDestructuringReturn)
-  
+
     > 为什么? 增加属性或者改变排序不会改变调用时的位置。
 
     ```javascript
@@ -587,7 +604,7 @@ Other Style Guides
 
   <a name="strings--quotes"></a><a name="6.1"></a>
   - [6.1](#strings--quotes) 字符串使用单引号 `''` 。
-  eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) 
+  eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html)
   jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
 
     ```javascript
@@ -626,7 +643,7 @@ Other Style Guides
 
   <a name="es6-template-literals"></a><a name="6.3"></a>
   - [6.3](#es6-template-literals) 程序化生成字符串时，使用模板字符串代替字符串连接。
-  eslint: [`prefer-template`](http://eslint.org/docs/rules/prefer-template.html) [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing) 
+  eslint: [`prefer-template`](http://eslint.org/docs/rules/prefer-template.html) [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing)
   jscs: [`requireTemplateStrings`](http://jscs.info/rule/requireTemplateStrings)
 
     > 为什么? 模板字符串插值更为简洁，更具可读性。
@@ -679,7 +696,7 @@ Other Style Guides
 
   <a name="functions--declarations"></a><a name="7.1"></a>
   - [7.1](#functions--declarations) 使用函数表达式，而不是函数声明。
-  eslint: [`func-style`](http://eslint.org/docs/rules/func-style) 
+  eslint: [`func-style`](http://eslint.org/docs/rules/func-style)
   jscs: [`requireFunctionDeclarations`](http://jscs.info/rule/requireFunctionDeclarations)
 
     > 为什么? 函数声明会把整个函数提升（hoisted），这导致非常容易在定义以前就被引用，这会降低可读性以及维护性（而函数表达式只会把函数的引用变量名提升）。如果发现一个函数定义非常大或复杂，会干扰其他逻辑的理解，此时也许是时候把它提取成独立模块了。
@@ -705,7 +722,7 @@ Other Style Guides
 
   <a name="functions--iife"></a><a name="7.2"></a>
   - [7.2](#functions--iife) <a name='7.2'></a> 用括号包裹 立即调用函数表达式（IIFE）。
-  eslint: [`wrap-iife`](http://eslint.org/docs/rules/wrap-iife.html) 
+  eslint: [`wrap-iife`](http://eslint.org/docs/rules/wrap-iife.html)
   jscs: [`requireParenthesesAroundIIFE`](http://jscs.info/rule/requireParenthesesAroundIIFE)
 
     > 为什么? 立即调用表达式(IIFE) 要使用圆括号包裹成一个独立的单元，这样表达更清晰。NOTE: 在模块的世界，你已经不再需要 IIFE 了。
@@ -979,7 +996,7 @@ Other Style Guides
 
   <a name="arrows--use-them"></a><a name="8.1"></a>
   - [8.1](#arrows--use-them) 当你必须使用函数表达式（或传递一个匿名函数）时，使用箭头函数符号。
-  eslint: [`prefer-arrow-callback`](http://eslint.org/docs/rules/prefer-arrow-callback.html), [`arrow-spacing`](http://eslint.org/docs/rules/arrow-spacing.html) 
+  eslint: [`prefer-arrow-callback`](http://eslint.org/docs/rules/prefer-arrow-callback.html), [`arrow-spacing`](http://eslint.org/docs/rules/arrow-spacing.html)
   jscs: [`requireArrowFunctions`](http://jscs.info/rule/requireArrowFunctions)
 
     > 为什么? 因为箭头函数会创建一个你通常最想要的 `this` 执行环境，而且语法也更简洁（译注：参考 [Arrow functions - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 和 [ES6 arrow functions, syntax and lexical scoping](http://toddmotto.com/es6-arrow-functions-syntaxes-and-lexical-scoping/)），通常情况下都能满足你的需求，而且这样的写法更为简洁。
@@ -1052,8 +1069,8 @@ Other Style Guides
     ```
 
   <a name="arrows--one-arg-parens"></a><a name="8.4"></a>
-  - [8.4](#arrows--one-arg-parens) 如果函数需要一个参数就省略掉圆括号，否则总是用圆括号包裹参数，这样更清晰。NOTE: 总是使用圆括号也是可以接受的，但要设置在 ESLint 中用["always" option](http://eslint.org/docs/rules/arrow-parens#always)，jscs 中用[`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam) 
-  eslint: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html) 
+  - [8.4](#arrows--one-arg-parens) 如果函数需要一个参数就省略掉圆括号，否则总是用圆括号包裹参数，这样更清晰。NOTE: 总是使用圆括号也是可以接受的，但要设置在 ESLint 中用["always" option](http://eslint.org/docs/rules/arrow-parens#always)，jscs 中用[`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam)
+  eslint: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html)
   jscs:  [`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam)
 
     > 为什么? 更少的视觉干扰
@@ -1089,7 +1106,7 @@ Other Style Guides
     ```
 
   <a name="arrows--confusing"></a><a name="8.5"></a>
-  - [8.5](#arrows--confusing) 避免使用比较操作符 (`<=`, `>=`)，会混淆 箭头函数语法 (`=>`) 
+  - [8.5](#arrows--confusing) 避免使用比较操作符 (`<=`, `>=`)，会混淆 箭头函数语法 (`=>`)
   eslint: [`no-confusing-arrow`](http://eslint.org/docs/rules/no-confusing-arrow)
 
     ```javascript
@@ -1404,7 +1421,7 @@ Other Style Guides
   <a name="modules--imports-first"></a>
   - [10.7](#modules--imports-first) 把所有的 `import` 语句放在其他语句上面
   eslint: [`import/imports-first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/imports-first.md)
-    
+
     > 为什么? 把 `import` 提升, 保持将它们写在文件顶部是个好习惯。
 
     ```javascript
@@ -1443,7 +1460,7 @@ Other Style Guides
   <a name="modules--no-webpack-loader-syntax"></a>
   - [10.9](#modules--no-webpack-loader-syntax) 不允许在 `import` 语句里包含 webpack 加载器语法。
   eslint: [`import/no-webpack-loader-syntax`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-webpack-loader-syntax.md)
-    
+
     > 为什么? 加载器语法要在 `webpack.config.js` 中使用
 
     ```javascript
@@ -1577,7 +1594,7 @@ Other Style Guides
 
   <a name="properties--dot"></a><a name="12.1"></a>
   - [12.1](#properties--dot) 使用 `.` 符号来访问对象的属性。
-  eslint: [`dot-notation`](http://eslint.org/docs/rules/dot-notation.html) 
+  eslint: [`dot-notation`](http://eslint.org/docs/rules/dot-notation.html)
   jscs: [`requireDotNotation`](http://jscs.info/rule/requireDotNotation)
 
     ```javascript
@@ -1683,7 +1700,7 @@ Other Style Guides
   - [13.4](#variables--define-where-used) 在你需要的地方给变量赋值，但请把它们放在一个合理的位置。
 
     > 为什么? `let` 和 `const` 是块级作用域而不是函数作用域。
-  
+
     ```javascript
     // bad - unnecessary function call
     function checkName(hasName) {
@@ -1717,7 +1734,7 @@ Other Style Guides
       return name;
     }
     ```
-    
+
   <a name="variables--no-chain-assignment"></a><a name="13.5"></a>
   - [13.5](#variables--no-chain-assignment) 不使用链接变量赋值。
 
@@ -2251,7 +2268,7 @@ Other Style Guides
 
   <a name="whitespace--spaces"></a><a name="18.1"></a>
   - [18.1](#whitespace--spaces) 使用 2 个空格作为缩进。
-  eslint: [`indent`](http://eslint.org/docs/rules/indent.html) 
+  eslint: [`indent`](http://eslint.org/docs/rules/indent.html)
   jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
 
     ```javascript
@@ -2273,7 +2290,7 @@ Other Style Guides
 
   <a name="whitespace--before-blocks"></a><a name="18.2"></a>
   - [18.2](#whitespace--before-blocks) 在大括号前放一个空格。
-  eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html) 
+  eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html)
   jscs: [`requireSpaceBeforeBlockStatements`](http://jscs.info/rule/requireSpaceBeforeBlockStatements)
 
     ```javascript
@@ -2302,7 +2319,7 @@ Other Style Guides
 
   <a name="whitespace--around-keywords"></a><a name="18.3"></a>
   - [18.3](#whitespace--around-keywords) 在控制语句（`if`、`while` 等）的小括号前放一个空格。在函数调用及声明中，不在函数的参数列表前加空格。
-  eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html) 
+  eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html)
   jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
 
     ```javascript
@@ -2329,7 +2346,7 @@ Other Style Guides
 
   <a name="whitespace--infix-ops"></a><a name="18.4"></a>
   - [18.4](#whitespace--infix-ops) <a name='18.4'></a> 使用空格把运算符隔开。
-  eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html) 
+  eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html)
   jscs: [`requireSpaceBeforeBinaryOperators`](http://jscs.info/rule/requireSpaceBeforeBinaryOperators), [`requireSpaceAfterBinaryOperators`](http://jscs.info/rule/requireSpaceAfterBinaryOperators)
 
     ```javascript
@@ -2405,7 +2422,7 @@ Other Style Guides
       .append('svg:g')
         .attr('transform', `translate(${radius + margin},${radius + margin})`)
         .call(tron.led);
-    
+
     // good
     const leds = stage.selectAll('.led').data(data);
     ```
@@ -2471,7 +2488,7 @@ Other Style Guides
 
   <a name="whitespace--padded-blocks"></a><a name="18.8"></a>
   - [18.8](#whitespace--padded-blocks) 不要使用空白行紧邻块作用域填充空间。
-  eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html) 
+  eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html)
   jscs:  [`disallowPaddingNewlinesInBlocks`](http://jscs.info/rule/disallowPaddingNewlinesInBlocks)
 
     ```javascript
@@ -2506,7 +2523,7 @@ Other Style Guides
 
   <a name="whitespace--in-parens"></a><a name="18.9"></a>
   - [18.9](#whitespace--in-parens) 不要在圆括号（parentheses）内侧两边填充空格，如函数调用、条件判断等。
-  eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) 
+  eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html)
   jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
 
     ```javascript
@@ -2533,7 +2550,7 @@ Other Style Guides
 
   <a name="whitespace--in-brackets"></a><a name="18.10"></a>
   - [18.10](#whitespace--in-brackets) 不要在中括号（brackets）内侧左右两边填充空格。
-  eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html) 
+  eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html)
   jscs: [`disallowSpacesInsideArrayBrackets`](http://jscs.info/rule/disallowSpacesInsideArrayBrackets)
 
     ```javascript
@@ -2548,7 +2565,7 @@ Other Style Guides
 
   <a name="whitespace--in-braces"></a><a name="18.11"></a>
   - [18.11](#whitespace--in-braces) 在大括号（curly braces）内侧两边添加空格。
-  eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html) 
+  eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html)
   jscs: [`requireSpacesInsideObjectBrackets`](http://jscs.info/rule/requireSpacesInsideObjectBrackets)
 
     ```javascript
@@ -2561,7 +2578,7 @@ Other Style Guides
 
   <a name="whitespace--max-len"></a><a name="18.12"></a>
   - [18.12](#whitespace--max-len) 避免一行代码过长，超过100个字符（包括空格）。Note: 参看 [strings--line-length](#strings--line-length)，过长字符应该分行处理。
-  eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html) 
+  eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html)
   jscs: [`maximumLineLength`](http://jscs.info/rule/maximumLineLength)
 
     > 为什么? 为了确保可读性、可维护性。注：作为一个良好的习惯，虽然显示器界面越来越大了，但代码为了通用性维护，如 shell 内也可以修改维护，那么有必要处理过长代码段。
@@ -2599,7 +2616,7 @@ Other Style Guides
 
   <a name="commas--leading-trailing"></a><a name="19.1"></a>
   - [19.1](#commas--leading-trailing) 行首逗号：**不需要**。
-  eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html) 
+  eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html)
   jscs: [`requireCommaBeforeLineBreak`](http://jscs.info/rule/requireCommaBeforeLineBreak)
 
     ```javascript
@@ -2636,7 +2653,7 @@ Other Style Guides
 
   <a name="commas--dangling"></a><a name="19.2"></a>
   - [19.2](#commas--dangling) 增加结尾的逗号: **需要**。
-  eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) 
+  eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html)
   jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
 
     > 为什么? 这会让 git diffs 更干净。另外，像 babel 这样的转译器会移除结尾多余的逗号，也就是说你不必担心老旧浏览器的[尾逗号问题](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas)。
@@ -2879,7 +2896,7 @@ Other Style Guides
 
   <a name="naming--camelCase"></a><a name="22.2"></a>
   - [22.2](#naming--camelCase) 使用驼峰式（camelCase、小驼峰）命名变量、对象、函数和实例。
-  eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) 
+  eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html)
   jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
 
     ```javascript
@@ -2895,7 +2912,7 @@ Other Style Guides
 
   <a name="naming--PascalCase"></a><a name="22.3"></a>
   - [22.3](#naming--PascalCase) 使用帕斯卡式（PascalCase、大驼峰式）命名构造函数或类。
-  eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html) 
+  eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html)
   jscs: [`requireCapitalizedConstructors`](http://jscs.info/rule/requireCapitalizedConstructors)
 
     Pascal命名法：单字之间不以空格断开或连接号（-）、底线（_）连结，第一个单字首字母采用大写字母；后续单字的首字母亦用大写字母
@@ -2924,7 +2941,7 @@ Other Style Guides
 
   <a name="naming--leading-underscore"></a><a name="22.4"></a>
   - [22.4](#naming--leading-underscore) 不要使用尾随或前导下划线来命名私有属性。
-  eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html) 
+  eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html)
   jscs: [`disallowDanglingUnderscores`](http://jscs.info/rule/disallowDanglingUnderscores)
 
     > 为什么? JavaScript没有在属性或方法方面的隐私权的概念。虽然一个领先的下划线是一个共同的公约，意思是“私人”，事实上，这些属性是完全公开的，因此，是你的公共API合同的一部分。这个约定可能会导致开发人员错误地认为一个变化不算是中断，或者不需要测试。TL；DR：如果你想要的东西是“私人的”，它不应该可见。
@@ -3211,9 +3228,9 @@ Other Style Guides
     ```
 
   <a name="jquery--queries"></a><a name="25.3"></a>
-  - [25.3](#jquery--queries) 对 DOM 查询使用层叠 `$('.sidebar ul')` 或 父元素 > 子元素 `$('.sidebar > ul')`。 
+  - [25.3](#jquery--queries) 对 DOM 查询使用层叠 `$('.sidebar ul')` 或 父元素 > 子元素 `$('.sidebar > ul')`。
   [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
-  
+
   <a name="jquery--find"></a><a name="25.4"></a>
   - [25.4](#jquery--find) 对有作用域的 jQuery 对象查询使用 `find`。
 
@@ -3293,7 +3310,7 @@ Other Style Guides
 
   <a name="testing--for-real"></a><a name="28.2"></a>
   - [28.2](#testing--for-real) **No, but seriously**:
-  
+
    - Whichever testing framework you use, you should be writing tests!
    - Strive to write many small pure functions, and minimize where mutations occur.
    - Be cautious about stubs and mocks - they can make your tests more brittle.
