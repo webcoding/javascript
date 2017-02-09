@@ -117,7 +117,7 @@ Other Style Guides
 ## 引用
 
   <a name="references--prefer-const"></a><a name="2.1"></a>
-  - [2.1](#references--prefer-const) 对所有的引用使用 `const` ；不要使用 `var`。
+  - [2.1](#references--prefer-const) 对所有的引用使用 `const`，不要使用 `var`。
   eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
 
     > 为什么? 这能确保你无法对引用重新赋值，也不会导致出现 bug 或难以理解。
@@ -290,7 +290,7 @@ Other Style Guides
   eslint: [`quote-props`](http://eslint.org/docs/rules/quote-props.html) 
   jscs: [`disallowQuotedKeysInObjects`](http://jscs.info/rule/disallowQuotedKeysInObjects)
 
-    > 为什么? In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
+    > 为什么? 通常我认为这样更容易阅读，这样可以使用语法高亮并且许多 js 引擎也更容易优化代码。
 
     ```javascript
     // bad
@@ -311,7 +311,7 @@ Other Style Guides
   <a name="objects--prototype-builtins"></a>
   - [3.7](#objects--prototype-builtins) 不要直接调用 `Object.prototype` 的方法，如 `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`
 
-    > 为什么? 这些方法可能会有问题，比如 `{ hasOwnProperty: false }` 的情况 或者 可能是 null object (`Object.create(null)`).
+    > 为什么? 这些方法可能会有问题，比如 `{ hasOwnProperty: false }` 的情况 或者 可能是 null object (`Object.create(null)`)。
 
     ```javascript
     // bad
