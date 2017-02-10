@@ -19,8 +19,12 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
 
 该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
 
-ES5 的编码规范请查看[版本一](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es5_zh-cn_v1.md)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es5_zh-cn_v2.md)，[版本三: 推荐](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es5_zh-cn_v3.md)。
-ES6 的编码规范请查看下文(最新版)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es6_zh-cn_v2.md)，[版本二](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es6_zh-cn_v2.md)，[版本三](#table-of-contents)
+相关链接：
+
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+- [ES6/ES2015 版](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es6_zh-cn_v3.md)
+- [ES5 版](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es5_zh-cn_v3.md)
+- [React/JSX 版](https://github.com/webcoding/javascript-style-guide/tree/master/docs/react-jsx_v1.md)
 
 ## Usage
 
