@@ -26,9 +26,9 @@
   # https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   # https://github.com/feross/eslint-config-standard/blob/master/eslintrc.json
   # extends: 'standard',
-  # ES5 推荐规范
-  # extends: 'airbnb',
-  extends: 'defaults/configurations/airbnb/es5',
+  # ES6 推荐规范
+  extends: 'airbnb',
+  # extends: 'defaults/configurations/airbnb/es6',
 
   # add your custom rules here
   rules: {
