@@ -2,7 +2,7 @@
 // ES6 代码规范练习场
 
 // 为便于测试，关闭部分规则检测
-/* eslint no-unused-vars: 0 */
+/* eslint no-unused-vars: 0, no-console: 0, prefer-const: 0, */
 
 // [类型](#types)
 // 使用 let const 替代 var

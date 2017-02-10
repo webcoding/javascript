@@ -28,17 +28,7 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
 
 ## Usage
 
-```
-# 安装依赖到全局，就不用每个项目单独安装了
-# standard: npm install -g eslint-config-standard eslint-plugin-standard eslint-plugin-promise
-# airbnb: npm install -g eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-airbnb
-
-# 最新项目推荐使用 airbnb，目前稍有改动，[ES6 规则配置 .eslintrc](.eslintrc)
-
-# 老旧项目，可以使用 [ES5 规则配置 .eslintrc](es5.eslintrc)
-
-# 将 ES6配置 放置在项目根目录，如果有老旧项目同时维护，可以将 ES5配置 放在全局。
-```
+参见[config-eslint](./config-eslint.md)
 
 NOTE: 使用规范最好的方式，就是配置好，直接用，然后各种问题就出来了
 

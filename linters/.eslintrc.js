@@ -1,6 +1,7 @@
 
 
-// 此文件可以设置为全局 Eslint 配置
+// 此文件为设置参考
+// 所有 ESLint 属性有列表设定，以及为什么
 
 
 /* global aa */
@@ -22,7 +23,7 @@
 /*eslint-disable */
 
 //suppress all warnings between comments
-//alert('foo');
+//alert("foo");
 
 /*eslint-enable */
 
@@ -32,13 +33,14 @@
 
 /*eslint-disable no-alert, no-console */
 
-// alert('foo');
-// console.log('bar');
+// alert("foo");
+// console.log("bar");
 
 /*eslint-enable no-alert */
 
 
 module.exports = {
+  // http://eslint.org/docs/user-guide/configuring
   // 环境定义了预定义的全局变量, 更多在官网查看
   "env": {
     "browser": true,
@@ -49,11 +51,11 @@ module.exports = {
     "mocha": true,
   },
 
-  // "plugins": [
-  //   "standard",
-  //   "promise"
-  // ],
-
+  // 声明全局变量。值 false 表示不可写（只读属性），true 表示可写
+  // 无论 true 或 false，都代表声明了
+  // 也可以文件中声明，如下
+  // /* global var1, var2 */
+  // /* global var1:false, var2:false */
   "globals": {
     "_": false,
     "$": false,
@@ -64,13 +66,32 @@ module.exports = {
   },
 
   //表示使用默认的规则进行校验
-  "extends": "eslint:recommended",
-  // "extends": 'standard',
+  // "extends": "eslint:recommended",
+  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
+  // https://github.com/feross/eslint-config-standard/blob/master/eslintrc.json
+  "extends": "standard",
+
+  // required to lint *.vue files
+  // eslint-config-standard
+  // 可共享的标准格式配置, 在自己工程中，加入 .eslint 文件即可
+  // eslint-plugin-html
+  // 支持从 html 等文件的 <script> 标签中读取配置的插件，通常配置文件都是 js 文件
+  "plugins": [
+    "html",
+    "standard",
+    "promise",
+  ],
 
   // JavaScript 语言选项
   "parserOptions": {
-    // ECMAScript 版本
+    // 设置你要解析的 JavaScript 的 ECMAScript 版本。默认是 ES7。
     // "ecmaVersion": 8,
+
+    // sourceType配置项有两个值： module 和 script ，默认是 script 。
+    // 主要是严格模式和 import/export 的区别。ES6 中的模块是严格模式，也就是你无须添加 use strict 。我们通常浏览器中使用的 script 是没有 import/export 语法的。
+    // 所以，选择了 script 则出现 import/export 会报错，可以使用严格模式声明，选择了 module ，则不用严格模式声明，可以使用 import/export 语法。
+    "sourceType": "module", //script
+
     // 想使用的额外的语言特性:
     "ecmaFeatures": {
       // 允许在全局作用域下使用 return 语句
@@ -118,7 +139,7 @@ module.exports = {
       "objectLiteralShorthandMethods": true,
       /*
         对象字面量属性名简写
-        var foo = 'bar';
+        var foo = "bar";
         var baz = {foo};
         baz // {foo: "bar"}
 
@@ -135,16 +156,15 @@ module.exports = {
       "templateStrings": true,
       "unicodeCodePointEscapes": true,
     },
-    "sourceType": "module", //script
   },
 
 
   /** 规则的严重性(rule severity)
-  * 0   或 0 - 关闭规则
+  * "off"   或 0 - 关闭规则
   *                turn the rule off 不验证 "warn"
   * "warn"  或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出),
   *                turn the rule on as a warning(doesn’ t affect exit code) 警告 2
-  * 2 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
+  * "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
   *                turn the rule on as an error(exit code is 1 when triggered) 错误（ 如有）规则的选项(additional options)
   */
 
@@ -170,7 +190,7 @@ module.exports = {
     // 要求箭头函数体使用大括号
     "arrow-body-style": 2,
     // 要求箭头函数的参数使用圆括号
-    "arrow-parens": 2,
+    "arrow-parens": 0,
     "arrow-spacing": [1, { "before": true, "after": true }],
     // 在块级作用域外访问块内定义的变量是否报错提示
     // 强制把变量的使用限制在其定义的作用域范围内
@@ -193,10 +213,10 @@ module.exports = {
     // "camelcase": [2, { "properties": "never" }],
     "class-methods-use-this": 2,
     // 数组和对象键值对最后一个逗号, never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，
-    // always-multiline：多行模式必须带逗号，单行模式不能带逗号(I don't care about IE8)
+    // always-multiline：多行模式必须带逗号，单行模式不能带逗号(I don"t care about IE8)
     // "comma-dangle": 0,
     // "comma-dangle": [1, "never"], // always-multiline
-    // "comma-dangle": [1, "always-multiline"], // never
+    "comma-dangle": [1, "always-multiline"], // never
     // 控制逗号前后的空格
     // 规定了逗号前后的空白，默认配置规定逗号前面没有空白，而逗号后面需要留空白
     "comma-spacing": [1, { "before": false, "after": true }],
@@ -236,8 +256,8 @@ module.exports = {
     "default-case": 2,
     // 在书写对象的属性或方法时，新的一行代码可以以. 开头，也可以以. 结束。
     // 强制object.key 中 . 的位置，参数:
-    //      property, '.'号应与属性在同一行
-    //      object,   '.'号应与对象名在同一行
+    //      property, "."号应与属性在同一行
+    //      object,   "."号应与对象名在同一行
     "dot-location": [2, "property"],
     // 强制使用.号取属性
     //    参数： allowKeywords: true  (默认)使用保留字做属性名时，只能使用.方式取属性
@@ -268,7 +288,7 @@ module.exports = {
     "func-style": 0,
     // "func-style": [2, "expression"],
     // 强制 generator 函数中 * 号周围使用一致的空格
-    "generator-star-spacing": [2, { "before": true, "after": true }],
+    "generator-star-spacing": [0, { "before": true, "after": true }],
     // 要求 require() 出现在顶层模块作用域中
     // 强制 require() 出现在模块作用域的顶部
     "global-require": 0,
@@ -299,7 +319,8 @@ module.exports = {
     "id-match": 1,
     // "id-match": [2, "^[a-z]+([A-Z][a-z]+)*$", { "properties": false }],
     // 统一代码缩进方式，默认值是4 spaces
-    "indent": [2, 2, { "SwitchCase": 1 }],
+    // "indent": [2, 2, { "SwitchCase": 1 }],
+    "indent": [2, 2, { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 } }],
     // "indent": 0,
     // 要求或禁止 var 声明中的初始化(初值)
     // 变量声明时必须赋初值
@@ -323,7 +344,7 @@ module.exports = {
     "linebreak-style": [1, "unix"],
     // 要求在注释周围有空行 ( 要求在块级注释之前有一空行)
     // 规定注释和代码块之间是否留空行
-    "lines-around-comment": [1, { "beforeBlockComment": true }],
+    "lines-around-comment": [1, { "beforeBlockComment": true, "allowBlockStart": true }],
     // "lines-around-comment": 2,
     "lines-around-directive": 2,
     // 规定代码最多可以嵌套多少层
@@ -396,7 +417,7 @@ module.exports = {
     // 禁止使用 debugger 语句
     // allow debugger during development
     // "no-debugger": 1,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
     // 禁止删除变量
     // 禁止使用 delete 删除 var声明的变量
     "no-delete-var": 2,
@@ -503,7 +524,7 @@ module.exports = {
     // 禁止在循环体中定义函数并且函数引用了外部变量
     // 在循环中定义了函数，但是函数内部没有引用外部变量，或者使用let定义的代码块变量，视为合法
     "no-loop-func": 2,
-    // 禁用'Magic numbers'，建议使用常量来命名（如 3.14 或 max: 10 之类的数字）
+    // 禁用"Magic numbers"，建议使用常量来命名（如 3.14 或 max: 10 之类的数字）
     // 忽视 数组索引 以及 数字 1 0 -1等
     "no-magic-numbers": 0,
     // "no-magic-numbers": [1, { "ignore": [0, -1, 1], "ignoreArrayIndexes": true }],
@@ -639,7 +660,7 @@ module.exports = {
     "no-undefined": 0,
     // 禁止标识符中有悬空下划线 _bar
     // 禁止在标识符前后使用下划线
-    "no-underscore-dangle": 1,
+    "no-underscore-dangle": 0,
     // 禁止出现令人困惑的多行表达式（为了保证两行不相关的代码不会意外的被当做一行代码来解析）
     "no-unexpected-multiline": 2,
     // 禁用一成不变的循环条件
@@ -706,11 +727,11 @@ module.exports = {
     "object-shorthand": 0,
     // 强制函数中的变量要么一起声明要么分开声明
     // 规定了在每个函数中声明变量是否只使用一次var，该规则同样适用于 let 和 const
-    "one-var": [2, { "initialized": "never" }],
-    // 要求或禁止在 var 声明周围换行
-    "one-var-declaration-per-line": 2,
+    "one-var": [1, { "initialized": "never" }],
+    // 禁止在 var 声明周围换行
+    "one-var-declaration-per-line": [1, "initializations"],
     // 要求或禁止在可能的情况下要求使用简化的赋值操作符
-    // 规定了使用赋值操作符的简写形式
+    // 规定了使用赋值操作符的简写形式 赋值运算符 += -=什么的
     "operator-assignment": 2,
     // "operator-assignment": [2, "always"],
     // 强制操作符使用一致的换行符
@@ -768,8 +789,9 @@ module.exports = {
     // 尽管ASI允许我们使用更加自由的代码风格，但是它也可能使得你的代码并不是按你期许的方式运行
     // 两个可选参数，always 和never
     // 默认配置always，要求在行末加上分号。
-    "semi": [1, "always"],
-    // "semi": [1, "never"],
+    // NOTE: 到底要不要分号，参看 https://github.com/feross/standard/blob/master/RULES.md#helpful-reading
+    // "semi": [1, "always"],
+    "semi": [1, "never"],
     // 强制分号之前和之后使用一致的空格
     // 该规则用来规定分号前后是否加空格，默认配置如下
     "semi-spacing": 0,
@@ -817,7 +839,7 @@ module.exports = {
     // 禁止和 NaN 作比较，要求使用 isNaN() 检查
     "use-isnan": 2,
     // 强制使用有效的 JSDoc 注释（用来检测JSDoc是否完整和合法）
-    "valid-jsdoc": 1,
+    "valid-jsdoc": 0,
     // 强制 typeof 表达式与有效的字符串进行比较
     // typeof 操作符返回的结果会是 "undefined",  "object",  "boolean", "number", "string", 和  "function"之一。
     // 保证 typeof 操作符返回的结果必须和上面六个字符串作比较
