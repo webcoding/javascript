@@ -3,10 +3,7 @@
 // http://eslint.org
 // http://standardjs.com/rules.html
 //
-// @dependencies 安装到全局，就不用每个项目单独安装了
-// npm install -g eslint eslint-plugin-import
-// standard: npm install -g eslint-config-standard eslint-plugin-standard eslint-plugin-promise
-// airbnb: npm install -g eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-airbnb
+// 配置参看 [config-eslint.md](https://github.com/webcoding/javascript-style-guide/blob/master/docs/config-eslint.md)
 
 // NOTE: 在新项目中使用 error 级别，在老项目中使用 warning 级别
 
@@ -23,6 +20,7 @@ module.exports = {
   },
 
   plugins: [
+    // 处理 html 文件内 js 代码规范等
     'html',
   ],
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
