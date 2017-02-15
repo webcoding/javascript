@@ -1,9 +1,33 @@
 
 source: https://github.com/sivan/javascript-style-guide/tree/master/es5
 
-# Airbnb JavaScript Style Guide() {  
+# Airbnb JavaScript Style Guide() {
 
 *用更合理的方式写 JavaScript*
+
+#### ES5 规范相对于 ES6，要求全是用尾分号
+
+针对老项目，注意以下细节(我的老项目的暂定处理方案)
+
+- 尾分号全要 "semi": ["error", "always"],
+- 不做要求："use strict"   "strict": 0,
+- 空白行使用一次最多两行
+- 不做要求：匿名函数必须命名 "func-names": 0,
+- 不做要求：函数圆括号之前有一个空格 "space-before-function-paren": 0,
+- 不做要求：语句块之前有一个空格 "space-before-blocks": 0,
+- 不做要求：圆括号内侧不能有紧邻空格 "space-in-parens": 0,
+- 不做要求：对象字面量属性名称使用引号(但要求使用一致的引号: 有 or 无) "quote-props": ["error", "consistent"],
+- 不做要求：强制使用一致的反勾号、双引号或单引号 "quotes": 0,
+- 暂不做要求：使用 === 和 !== 而非 == 和 != "eqeqeq": 0,
+- 暂定：强制行的最大长度（现在显示器越发大了，可以暂定160） "max-len": ["error", { "code": 160 }],
+- 暂不做要求：码块的开始和结尾是否应该留一个空行 "padded-blocks": 0,
+- 暂不做要求：关键字keyword前后是否需要留一个空格 "keyword-spacing": 0,
+
+老项目常见问题：
+
+- 变量及函数命名未使用驼峰式 "camelcase": 2,
+- 禁止对函数参数再赋值 "no-param-reassign": ["error", { "props": false }],
+- 禁止在返回语句中赋值，除非用圆括号括起来 "no-return-assign": 2,
 
 ## <a name="table-of-contents">目录</a>
 

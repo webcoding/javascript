@@ -15,7 +15,7 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
   - 不要行尾空格
   - 文档底部保留一个空行
   - 空白行不要字符
-  - 最多可以连续使用两个空白行
+  - 空白行使用一次最多两行
 
 该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
 
