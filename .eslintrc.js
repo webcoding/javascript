@@ -2,11 +2,10 @@
 // JS 书写规范
 // http://eslint.org
 // http://standardjs.com/rules.html
-// 具体规范参见文档[javascript-style-guide](https://github.com/webcoding/javascript-style-guide/blob/master/docs)
+// - 规范文档参看[javascript-style-guide](https://github.com/webcoding/javascript-style-guide/blob/master/docs)
+// - 具体配置及注意事项参看 [config-eslint.md](https://github.com/webcoding/javascript-style-guide/blob/master/docs/config-eslint.md)
 
-// 配置参看 [config-eslint.md](https://github.com/webcoding/javascript-style-guide/blob/master/docs/config-eslint.md)
-
-// NOTE: 兼容性设定，放置在项目根目录，同时支持 ES5、ES6 便于切换
+// NOTE: 兼容性设定，放置在项目根目录，此文件同时支持 ES5、ES6 便于切换（切换注释即可，待修订）
 
 module.exports = {
   root: true,
@@ -24,6 +23,7 @@ module.exports = {
     // 处理 html 文件内 js 代码规范等
     'html',
   ],
+
   // ES5 推荐规范
   // extends: 'webcoding/configurations/airbnb/es5',
   // ES6 推荐规范
