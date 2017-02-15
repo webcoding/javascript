@@ -1477,10 +1477,10 @@ Other Style Guides
 
 
 <a name="iterators-and-generators"></a>
-## Iterators and Generators 迭代器 & 生成器
+## Iterators and Generators
 
   <a name="iterators--nope"></a><a name="11.1"></a>
-  - [11.1](#iterators--nope) 不要使用 iterators。使用高阶函数例如 `map()` 和 `reduce()` 替代 `for-in` or `for-of`。
+  - [11.1](#iterators--nope) 不要使用迭代器 iterators。使用高阶函数例如 `map()` 和 `reduce()` 替代 `for-in` or `for-of`。
   eslint: [`no-iterator`](http://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](http://eslint.org/docs/rules/no-restricted-syntax)
 
     > 为什么? 这加强了我们不变的规则。处理纯函数的回调值更易读，这比它带来的副作用更重要。
@@ -1520,7 +1520,7 @@ Other Style Guides
     ```
 
   <a name="generators--nope"></a><a name="11.2"></a>
-  - [11.2](#generators--nope) 现在还不要使用生成器 generators。
+  - [11.2](#generators--nope) 现在还不要使用 generators。
 
     > 为什么? 因为它们现在还没法很好地编译到 ES5。 (译者注：目前(2016/03) Chrome 和 Node.js 的稳定版本都已支持 generators)
 

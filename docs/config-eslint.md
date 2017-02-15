@@ -5,6 +5,14 @@
 
 > 为什么选用 `.eslintrc.js` 后缀名？因为 `.json` 没法加注释，格式要求比较严格，而 `.eslintrc` 格式在 vscode 中默认做 json 处理了，其中的注释 # 就显示为了异常，所以统一使用 js 格式，通用了
 
+NOTE: 可扩展需求
+
+- eslint-plugin-html  html 内 js 规范
+- eslint-plugin-react react 规范
+- eslint-plugin-jsx-a11y JSX 代码段内应用 AST 检查器
+- eslint-plugin-promise 回调函数使用最佳实践
+- eslint-plugin-vue 支持 vue 文件
+
 ## 项目配置，安装 ESLint 依赖
 
 可以安装到全局，全部共用
@@ -12,9 +20,14 @@
 ```
 // ES6 推荐使用 airbnb
 npm install -g eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-airbnb
+// 之后设置
+extend: 'airbnb',
 
-// 如果使用 standardjs(仅仅涉及 ES5)
-npm install -g eslint-config-standard eslint-plugin-standard eslint-plugin-promise
+
+// ES5 推荐使用 airbnb/es5（）
+npm install -g eslint eslint-config-webcoding
+// 之后设置
+extend: 'webcoding/configurations/airbnb/es5',
 ```
 
 
