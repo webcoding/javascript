@@ -67,23 +67,45 @@ plugins: [
 ```
 编辑器要安装 linter-eslint 插件
 配置 .eslintrc filePath 为 .eslintrc.js
+勾选选项 Show Rule ID in Messages (错误提示中会显示官网 rules 链接)
 勾选选项 Use global ESLint installation
 ```
 
-**小提示：** Atom 编辑器的 eslint 提示，可以直接打开 ESLint 官网查看 rules，此时通过修改配置，可以修改打开对应的中文网站。
+**小提示：** Atom 编辑器的 eslint 提示，有链接规则直接可打开 ESLint 官网，通过修改配置，可调整为打开对应的中文网站。
 
+```
 Preferences => Open Config Folder => 找到组件  packages/linter-eslint
             => 找到 node_modules/eslint-rule-documentation/index.js
             => 将 getRuleURI 函数中 eslint.org/ 修改为 eslint.cn/
             => 重启见效
 
+参看插件源码: https://github.com/AtomLinter/linter-eslint
+```
 
 ### VSCode
 
 ```
 编辑器要安装 eslint 插件
 编辑器增加全局配置
-  "eslint.options": {
-    "configFile": "./.eslintrc.js"
-  },
+"eslint.options": {
+  "configFile": "./.eslintrc.js"
+},
+
+参看插件源码: https://github.com/Microsoft/vscode-eslint
+```
+
+NOTE：不要修改配置 `"eslint.autoFixOnSave": false,`，否则开启修复功能，可能会导致意料外的修复发生，最好手动处理，而针对简单文件，可以绑定快捷键调用此功能。
+
+绑定快捷键到 `eslint.executeAutofix` 可以调用自动修复（Fix all auto-fixable problems），示例如下：
+
+```
+// eslint 发布内容tab 有个命令列表，快捷键就可以绑定到对应的命令上
+// 使用不太可能常用的快捷键，避免误修复，同时可以单手操作的快捷键
+{
+  "key": "ctrl+alt+cmd+space",
+  "command": "eslint.executeAutofix",
+  "when": "editorTextFocus"
+}
+
+NOTE: 目前(20170216) VSCode 的提示不允许外链，所以 eslint 插件的提示，也无法做到[提示链接指向官方文档](https://github.com/Microsoft/vscode/issues/11847)
 ```

@@ -36,9 +36,10 @@ module.exports = {
     semi: ['error', 'never'],
     // 多行模式必须带逗号，单行模式不能带逗号
     'comma-dangle': ['error', 'always-multiline'],
-    // 'max-len': ['error', 120],
+    'max-len': ['error', {'code': 160}],
     // 禁止使用 console debugger
     // 'no-console': 1,
-    // 'no-debugger': 1,
+    // 禁止使用 debugger
+    // 'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
 }

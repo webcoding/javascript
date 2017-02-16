@@ -10,7 +10,7 @@ source: https://github.com/sivan/javascript-style-guide/tree/master/es5
 针对老项目，注意以下细节(我的老项目的暂定处理方案)
 
 - 尾分号全要 "semi": ["error", "always"],
-- 不做要求："use strict"   "strict": 0,
+- 不做要求："use strict" 使用严格模式 "strict": 0,
 - 空白行使用一次最多两行
 - 不做要求：匿名函数必须命名 "func-names": 0,
 - 不做要求：函数圆括号之前有一个空格 "space-before-function-paren": 0,
