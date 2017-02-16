@@ -11,11 +11,13 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
 - 尾逗号单行不要有，多行必须有。修改规则 `comma-dangle: ['error', 'never']` 中 never 改为 always-multiline。
 - 行尾不要分号。调整后，代码更干净、整洁，但要注意 (, [, + , -, or ` 开头的语句，可能在“自动分号插入”机制（ASI）下会有问题。<br>
   为什么? 参看[是否要分号的讨论](https://github.com/feross/standard/blob/master/RULES.md#helpful-reading)
-- 本文档有大量对 ES6 新特性规则要求，此外的书写要求兼容 [ES5 代码规范](http://standardjs.com/rules.html)。以下是一些空白相关的部分
+- 本文档有大量对 ES6 新特性规则要求，此外的书写要求兼容 [ES5 代码规范](http://standardjs.com/rules.html)。<br>
+  注意以下情况：
   - 不要行尾空格
   - 文档底部保留一个空行
   - 空白行不要字符
   - 空白行使用一次最多两行
+  - 禁止未使用过的变量，但设置为不检查参数 "no-unused-vars": ["error", { "args": "none" }],
 
 该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
 

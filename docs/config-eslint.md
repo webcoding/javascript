@@ -25,13 +25,17 @@ a11y是accessibility（无障碍环境）的缩写，从第一个字母a到最�
 
 ```
 // ES6 推荐使用 airbnb
+npm install -g babel-eslint
 npm install -g eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-airbnb
+
 // 之后设置
 extend: 'airbnb',
+```
 
-
+```
 // ES5 推荐使用 airbnb/es5（）
 npm install -g eslint eslint-config-webcoding
+
 // 之后设置
 extend: 'webcoding/configurations/airbnb/es5',
 ```
