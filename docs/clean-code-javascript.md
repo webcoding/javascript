@@ -8,7 +8,9 @@
 
 其他 https://github.com/cmstead/js-refactor
 
+
 # [](#clean-code-javascript) JavaScript 代码整洁之道
+
 
 ## [](#table-of-contents)目录
 
@@ -23,6 +25,7 @@
 1. [格式](#formatting)
 1. [注释](#comments)
 
+
 ## [](#introduction)概述
 
 [![一张幽默的图片：软件质量通过你在阅读代码的时候有多少报怨来进行评估](http://p0.qhimg.com/t01cb6a971284a41620.jpg)](http://p0.qhimg.com/t01cb6a971284a41620.jpg)
@@ -35,6 +38,7 @@ Robert C. Martin 在
 我们在软件工程方面的技术发展刚刚超过 50 年，我们仍然在学习很多东西。当软件架构和架构本身一样古老的时候，我们应该遵循更为严格规则。现在，对于你和你的团队编写的 JavaScript 代码，不妨依据这些准则来进行质量评估。
 
 还有一件事：知道这些不会马上让你成为更好的软件开发者，在工作中常年使用这些准则不能让你避免错误。每一段代码都从最初的草图开始到最终成型，就像为湿粘土塑形一样。最后，当我们与同行一起审查的时候，再把不完美的地方消除掉。不要因为初稿需要改善而否定自己，需要要否定的只是那些代码！
+
 
 ## [](#variables)**变量**
 
@@ -997,6 +1001,8 @@ console.log('Employee name: ' + employee.getName()); // Employee name: John Doe
 ```
 
 **[⬆ 回到顶部](#table-of-contents)**
+
+
 
 ## [](#classes)**类**
 

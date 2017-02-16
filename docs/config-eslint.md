@@ -62,6 +62,8 @@ plugins: [
 
 ## 编辑器配置
 
+建议使用 Atom 或 VSCode 编辑器
+
 ### Atom
 
 ```
@@ -108,4 +110,18 @@ NOTE：不要修改配置 `"eslint.autoFixOnSave": false,`，否则开启修复�
 }
 
 NOTE: 目前(20170216) VSCode 的提示不允许外链，所以 eslint 插件的提示，也无法做到[提示链接指向官方文档](https://github.com/Microsoft/vscode/issues/11847)
+```
+
+### 其他
+
+推荐使用 [zsh](http://ohmyz.sh/)，配合插件[z](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/z)实现跟踪/跳转你最常用的目录，配置 plugins=(z)即可。
+
+如此，想要打开一个项目 protest，直接如下即可
+
+```
+# z protest
+//使用 Atom 打开此项目
+# atom .
+//使用 VSCode 打开此项目
+# code .
 ```
