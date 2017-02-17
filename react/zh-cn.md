@@ -9,6 +9,7 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
   1. [基本规范](#basic-rules-基本规范)
   1. [Class vs React.createClass vs stateless](#创建模块)
+  1. [Mixins](#mixins-混入)
   1. [命名](#naming-命名)
   1. [声明模块](#declaration-声明模块)
   1. [代码对齐](#alignment-代码对齐)
@@ -25,14 +26,15 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 ## Basic Rules 基本规范
 
   - 每个文件只写一个模块.
-    - 但是多个[无状态模块](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)可以放在单个文件中. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
+    - 但是多个[无状态模块](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)可以放在单个文件中.
+    eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
   - 推荐使用JSX语法.
   - 不要使用 `React.createElement`，除非从一个非JSX的文件中初始化你的app.
 
 ## 创建模块
-   Class vs React.createClass vs stateless  
+   Class vs React.createClass vs stateless
 
-  - 如果你的模块有内部状态或者是`refs`, 推荐使用 `class extends React.Component` 而不是 `React.createClass` ,除非你有充足的理由来使用这些方法.   
+  - 如果你的模块有内部状态或者是`refs`, 推荐使用 `class extends React.Component` 而不是 `React.createClass` ,除非你有充足的理由来使用这些方法.
   eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
 
     ```jsx
@@ -74,11 +76,18 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     }
     ```
 
+## Mixins 混入
+
+  - [Do not use mixins](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html).
+
+  > 为什么？混入引入了隐式依赖，导致命名冲突，导致组件越发复杂。大多数使用 Mixins 的案例，都能通过高阶组件或工具模块完成。
+
 ## Naming 命名
 
   - **扩展名**: React模块使用 `.jsx` 扩展名.
   - **文件名**: 文件名使用帕斯卡命名. 如, `ReservationCard.jsx`.
-  - **引用命名**: React模块名使用帕斯卡命名，实例使用骆驼式命名. eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
+  - **引用命名**: React模块名使用帕斯卡命名，实例使用骆驼式命名.
+ eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
 
     ```jsx
     // bad
@@ -163,7 +172,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
 ## Alignment 代码对齐
 
-  - 遵循以下的JSX语法缩进/格式. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+  - 遵循以下的JSX语法缩进/格式.
+  eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
     ```jsx
     // bad
@@ -190,7 +200,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
 ## Quotes 单引号还是双引号
 
-  - 对于JSX属性值总是使用双引号(`"`), 其他均使用单引号(`'`). eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
+  - 对于JSX属性值总是使用双引号(`"`), 其他均使用单引号(`'`).
+  eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
 
   > 为什么? HTML属性也是用双引号, 因此JSX的属性也遵循此约定.
 
@@ -210,7 +221,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
 ## Spacing 空格
 
-  - 总是在自动关闭的标签前加一个空格，正常情况下也不需要换行. eslint: [`no-multi-spaces`](http://eslint.org/docs/rules/no-multi-spaces), [`react/jsx-space-before-closing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-space-before-closing.md)
+  - 总是在自动关闭的标签前加一个空格，正常情况下也不需要换行.
+  eslint: [`no-multi-spaces`](http://eslint.org/docs/rules/no-multi-spaces), [`react/jsx-space-before-closing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-space-before-closing.md)
 
     ```jsx
     // bad
@@ -227,7 +239,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     <Foo />
     ```
 
-  - 不要在JSX `{}` 引用括号里两边加空格. eslint: [`react/jsx-curly-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md)
+  - 不要在JSX `{}` 引用括号里两边加空格.
+  eslint: [`react/jsx-curly-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md)
 
     ```jsx
     // bad
@@ -255,7 +268,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     />
     ```
 
-  - 如果属性值为 `true`, 可以直接省略. eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
+  - 如果属性值为 `true`, 可以直接省略.
+  eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
 
     ```jsx
     // bad
@@ -269,7 +283,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     />
     ```
 
-  - `<img>` 标签总是添加 `alt` 属性. 如果图片以presentation(感觉是以类似PPT方式显示?)方式显示，`alt` 可为空, 或者`<img>` 要包含`role="presentation"`. eslint: [`jsx-a11y/img-has-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-has-alt.md)
+  - `<img>` 标签总是添加 `alt` 属性. 如果图片以presentation(感觉是以类似PPT方式显示?)方式显示，`alt` 可为空, 或者`<img>` 要包含`role="presentation"`.
+  eslint: [`jsx-a11y/img-has-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-has-alt.md)
 
     ```jsx
     // bad
@@ -310,7 +325,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     <div role="button" />
     ```
 
-  - 不要在标签上使用 `accessKey` 属性. eslint: [`jsx-a11y/no-access-key`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md)
+  - 不要在标签上使用 `accessKey` 属性.
+  eslint: [`jsx-a11y/no-access-key`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md)
 
   > 为什么? 屏幕助读器在键盘快捷键与键盘命令时造成的不统一性会导致阅读性更加复杂.
 
@@ -340,8 +356,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     />
   ))}
   ```
-  
-  - 对于所有非必须的属性，总是手动去定义`defaultProps`属性.
+
+  - 对于所有非必须的属性，总是手动去定义 `defaultProps` 属性.
 
   > 为什么? propTypes 可以作为模块的文档说明, 并且声明 defaultProps 的话意味着阅读代码的人不需要去假设一些默认值。更重要的是, 显示的声明默认属性可以让你的模块跳过属性类型的检查.
 
@@ -363,6 +379,7 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
   SFC.propTypes = {
     foo: PropTypes.number.isRequired,
     bar: PropTypes.string,
+    children: PropTypes.node,
   };
   SFC.defaultProps = {
     bar: '',
@@ -372,7 +389,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
 ## Refs
 
-  - 总是在Refs里使用回调函数. eslint: [`react/no-string-refs`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)
+  - 总是在Refs里使用回调函数.
+  eslint: [`react/no-string-refs`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)
 
     ```jsx
     // bad
@@ -386,10 +404,10 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     />
     ```
 
-
 ## Parentheses 括号
 
-  - 将多行的JSX标签写在 `()`里. eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
+  - 将多行的JSX标签写在 `()`里.
+  eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
 
     ```jsx
     // bad
@@ -417,7 +435,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
 ## Tags 标签
 
-  - 对于没有子元素的标签来说总是自己关闭标签. eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
+  - 对于没有子元素的标签来说总是自己关闭标签.
+  eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
 
     ```jsx
     // bad
@@ -427,7 +446,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     <Foo className="stuff" />
     ```
 
-  - 如果模块有多行的属性， 关闭标签时新建一行. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+  - 如果模块有多行的属性，关闭标签时新建一行.
+  eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
     ```jsx
     // bad
@@ -496,7 +516,9 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     ```
 
   - 在React模块中，不要给所谓的私有函数添加 `_` 前缀，本质上它并不是私有的.
-  > 为什么？`_` 下划线前缀在某些语言中通常被用来表示私有变量或者函数。但是不像其他的一些语言，在JS中没有原生支持所谓的私有变量，所有的变量函数都是共有的。尽管你的意图是使它私有化，在之前加上下划线并不会使这些变量私有化，并且所有的属性（包括有下划线前缀及没有前缀的）都应该被视为是共有的。了解更多详情请查看Issue [#1024](https://github.com/airbnb/javascript/issues/1024), 和 [#490](https://github.com/airbnb/javascript/issues/490) 。
+
+  > 为什么？`_` 下划线前缀在某些语言中通常被用来表示私有变量或者函数。但是不像其他的一些语言，在JS中没有原生支持所谓的私有变量，所有的变量函数都是共有的。尽管你的意图是使它私有化，在之前加上下划线并不会使这些变量私有化，并且所有的属性（包括有下划线前缀及没有前缀的）都应该被视为是共有的。
+  了解更多详情请查看Issue [#1024](https://github.com/airbnb/javascript/issues/1024), 和 [#490](https://github.com/airbnb/javascript/issues/490) 。
 
     ```jsx
     // bad
@@ -518,7 +540,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     }
     ```
 
-  - 在 `render` 方法中总是确保 `return` 返回值. eslint: [`react/require-render-return`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
+  - 在 `render` 方法中总是确保 `return` 返回值.
+  eslint: [`react/require-render-return`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
 
     ```jsx
     // bad
@@ -546,7 +569,7 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
   1. `componentWillUpdate` 上面的方法返回 `true`， 模块将重新渲染
   1. `componentDidUpdate` 模块渲染结束
   1. `componentWillUnmount` 模块将从DOM中清除, 做一些清理任务
-  1. *点击回调或者事件处理器* 如 `onClickSubmit()` 或 `onChangeDescription()`
+  1. *点击回调 clickHandlers 或者事件处理器 eventHandlers* 如 `onClickSubmit()` 或 `onChangeDescription()`
   1. *`render` 里的 getter 方法* 如 `getSelectReason()` 或 `getFooterContent()`
   1. *可选的 render 方法* 如 `renderNavigation()` 或 `renderProfilePicture()`
   1. `render` render() 方法
@@ -582,7 +605,8 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
     export default Link;
     ```
 
-  - `React.createClass` 的生命周期函数，与使用class稍有不同: eslint: [`react/sort-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md)
+  - `React.createClass` 的生命周期函数，与使用class稍有不同:
+  eslint: [`react/sort-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md)
 
   1. `displayName` 设定模块名称
   1. `propTypes` 设置属性的类型
@@ -608,10 +632,25 @@ source: https://github.com/JasonBoy/javascript/tree/master/react
 
 ## isMounted
 
-  - 不要再使用 `isMounted`. eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
+  - 不要再使用 `isMounted`.
+  eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
 
-  > 为什么? [`isMounted` 反人类设计模式:()][anti-pattern], 在 ES6 classes 中无法使用， 官方将在未来的版本里删除此方法.
+  > 为什么? [`isMounted` 反人类设计模式:()][anti-pattern], 在 ES6 classes 中无法使用，官方将在未来的版本里删除此方法.
 
   [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+
+**[⬆ 回到顶部](#内容目录)**
+
+## Translation 翻译
+
+  This JSX/React style guide is also available in other languages:
+
+  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: [JasonBoy/javascript](https://github.com/JasonBoy/javascript/tree/master/react)
+  - ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polish**: [pietraszekl/javascript](https://github.com/pietraszekl/javascript/tree/master/react)
+  - ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [apple77y/javascript](https://github.com/apple77y/javascript/tree/master/react)
+  - ![Br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Portuguese**: [ronal2do/javascript](https://github.com/ronal2do/airbnb-react-styleguide)
+  - ![jp](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanese**: [mitsuruog/javascript-style-guide](https://github.com/mitsuruog/javascript-style-guide/tree/master/react)
+  - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Español**: [agrcrobles/javascript](https://github.com/agrcrobles/javascript/tree/master/react)
+  - ![ua](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ukrainian**: [ivanzusko/javascript](https://github.com/ivanzusko/javascript/tree/master/react)
 
 **[⬆ 回到顶部](#内容目录)**

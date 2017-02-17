@@ -28,7 +28,7 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 - [ES6/ES2015 版](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es6_zh-cn_v3.md)
 - [ES5 版](https://github.com/webcoding/javascript-style-guide/tree/master/docs/es5_zh-cn_v3.md)
-- [React/JSX 版](https://github.com/webcoding/javascript-style-guide/tree/master/docs/react-jsx_v1.md)
+- [React/JSX 版](https://github.com/webcoding/javascript-style-guide/tree/master/react/zh-cn.md)
 - [VueJS 版](https://github.com/jackbarham/vuejs-style-guide)
 
 扩展使用 eslint-plugin-html eslint-plugin-vue
