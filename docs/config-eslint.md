@@ -1,7 +1,7 @@
 
-# 配置使用
+# ESLint 配置使用
 
-拷贝 [.eslintrc.js](../.eslintrc.js) 到项目根目录，默认情况下值检测 .js 后缀文件，可以参看扩展组件获得其他需求的支持。
+下载 [.eslintrc.js](../.eslintrc.js) 到项目根目录，默认情况下值检测 .js 后缀文件，可以参看扩展组件获得其他需求的支持。
 
 > 为什么选用 `.eslintrc.js` 后缀名？因为 `.json` 没法加注释，格式要求比较严格，而 `.eslintrc` 格式在 vscode 中默认做 json 处理了，其中的注释 # 就显示为了异常，所以统一使用 js 格式，通用了
 
@@ -73,8 +73,9 @@ plugins: [
 ```
 编辑器要安装 linter-eslint 插件
 配置 .eslintrc filePath 为 .eslintrc.js
+勾选 Lint HTML Files (配合 eslint-plugin-html 以支持检测 html 格式文件等)
 勾选选项 Show Rule ID in Messages (错误提示中会显示官网 rules 链接)
-勾选选项 Use global ESLint installation
+勾选选项 Use global ESLint installation（使用全局组件 eslint）
 ```
 
 **小提示：** Atom 编辑器的 eslint 提示，有链接规则直接可打开 ESLint 官网，通过修改配置，可调整为打开对应的中文网站。

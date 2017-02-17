@@ -1,5 +1,9 @@
 # Airbnb JavaScript Style Guide() {
 
+- [ES6 中文版](https://github.com/webcoding/javascript-style-guide/blob/master/docs/es6_zh-cn_v3.md)
+- [ES5 中文版](https://github.com/webcoding/javascript-style-guide/blob/master/docs/es5_zh-cn_v3.md)
+- [eslint 配置注意事项](https://github.com/webcoding/javascript-style-guide/blob/master/docs/config-eslint.md)
+
 *A mostly reasonable approach to JavaScript*
 
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
