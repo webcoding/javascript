@@ -12,12 +12,13 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
 - 行尾不要分号。调整后，代码更干净、整洁，但要注意 (, [, + , -, or ` 开头的语句，可能在“自动分号插入”机制（ASI）下会有问题。<br>
   为什么? 参看[是否要分号的讨论](https://github.com/feross/standard/blob/master/RULES.md#helpful-reading)
 - 本文档有大量对 ES6 新特性规则要求，此外的书写要求兼容 [ES5 代码规范](http://standardjs.com/rules.html)。<br>
-  注意以下情况：
+- 注意以下情况：
   - 不要行尾空格
   - 文档底部保留一个空行
-  - 空白行不要字符
-  - 空白行使用一次最多两行
+  - 空白行不要有空白字符
+  - 空白行使用一次最多连续两行
   - 禁止未使用过的变量，但设置为不检查参数 "no-unused-vars": ["error", { "args": "none" }],
+  - 箭头函数的参数使用圆括号，但参数只有一个时，可以省略圆括号，但若函数体在指令块中则必须写圆括号
 
 该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
 
@@ -277,7 +278,7 @@ Other Style Guides
   <a name="objects--grouped-shorthand"></a><a name="3.5"></a>
   - [3.5](#objects--grouped-shorthand) 在对象属性声明前把简写的属性分组。
 
-  > 为什么? 因为这样能清楚地看出哪些属性使用了简写。
+    > 为什么? 因为这样能清楚地看出哪些属性使用了简写。
 
     ```javascript
     const anakinSkywalker = 'Anakin Skywalker';
@@ -702,7 +703,9 @@ Other Style Guides
   jscs: [`requireFunctionDeclarations`](http://jscs.info/rule/requireFunctionDeclarations)
 
     > 为什么? 函数声明会把整个函数提升（hoisted），这导致非常容易在定义以前就被引用，这会降低可读性以及维护性（而函数表达式只会把函数的引用变量名提升）。如果发现一个函数定义非常大或复杂，会干扰其他逻辑的理解，此时也许是时候把它提取成独立模块了。
+
     > 另外不要忘记给匿名表达式命名，匿名函数会使错误堆栈中跟踪问题更加困难。
+
     > 函数提升规则，使得[箭头函数](#arrow-functions)可以取代函数表达式。
 
     ```javascript
@@ -872,7 +875,7 @@ Other Style Guides
     ```
 
   <a name="functions--signature-spacing"></a><a name="7.11"></a>
-  - [7.11](#functions--signature-spacing) 函数签名的左右间距。
+  - [7.11](#functions--signature-spacing) 函数签名的左右保留一个空格(签名与圆括号之间不要空格)。
   eslint: [`space-before-function-paren`](http://eslint.org/docs/rules/space-before-function-paren) [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks)
 
     > 为什么? 一致性好，当添加或移除名称时，不必添加或移除空间。
@@ -1071,11 +1074,13 @@ Other Style Guides
     ```
 
   <a name="arrows--one-arg-parens"></a><a name="8.4"></a>
-  - [8.4](#arrows--one-arg-parens) 如果函数需要一个参数就省略掉圆括号，否则总是用圆括号包裹参数，这样更清晰。NOTE: 总是使用圆括号也是可以接受的，但要设置在 ESLint 中用["always" option](http://eslint.org/docs/rules/arrow-parens#always)，jscs 中用[`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam)
+  - [8.4](#arrows--one-arg-parens) 如果函数需要单一的参数那就省略掉圆括号，否则总是用圆括号包裹参数，这样更清晰。NOTE: 总是使用圆括号也是可以接受的，但要设置在 ESLint 中用["always"](http://eslint.org/docs/rules/arrow-parens#always)，jscs 中用[`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam)
   eslint: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html)
   jscs:  [`disallowParenthesesAroundArrowParam`](http://jscs.info/rule/disallowParenthesesAroundArrowParam)
 
     > 为什么? 更少的视觉干扰
+
+    NOTE: 箭头函数的参数使用圆括号，但参数只有一个时，可以省略圆括号，但若函数体在指令块中则必须写圆括号。配置为 "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }]
 
     ```javascript
     // bad
@@ -1105,6 +1110,12 @@ Other Style Guides
       const y = x + 1;
       return x * y;
     });
+
+    // bad
+    export default context => {
+      // ...
+      return app
+    }
     ```
 
   <a name="arrows--confusing"></a><a name="8.5"></a>
@@ -1384,7 +1395,7 @@ Other Style Guides
     ```
 
   <a name="modules--no-mutable-exports"></a>
-  - [10.5](#modules--no-mutable-exports) 禁止 `export` 可写值输出，使用常量（Functions/Classes 暂时例外）。
+  - [10.5](#modules--no-mutable-exports) 禁止 `export` 导出可变变量，应该使用常量（Functions/Classes 暂时例外）。
   eslint: [`import/no-mutable-exports`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-mutable-exports.md)
 
     > 为什么? 避免全局使用时出现问题，除了某些特定情况下确实要这样用。一般来说，`export` 应该输出常量。
@@ -1972,14 +1983,13 @@ Other Style Guides
   - [15.4](#comparison--moreinfo) 想了解更多信息，参考 Angus Croll 的 [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108)。
 
   <a name="comparison--switch-blocks"></a><a name="15.5"></a>
-  - [15.5](#comparison--switch-blocks) `case` 以及 `default` 情况下使用括号会创建块级作用域 (e.g. `let`, `const`, `function`, and `class`).
+  - [15.5](#comparison--switch-blocks) 如果 `case` 以及 `default` 中包含声明部分 (e.g. `let`, `const`, `function`, and `class`)，使用大括号以创建块级作用域。
 
-    > 为什么? 变量声明在整个 `switch` 代码块中是可用的，但只有在执行到 `case` 并赋值时才初始化。多 `case` 中重复定义会导致问题。
+    > 为什么? 声明在整个 `switch` 代码块中可见，但只有在执行到 `case` 并赋值时才初始化。这可能在多 `case` 中导致重复定义从而出现问题。
 
-  eslint rules: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html).
+  eslint: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html)
 
     ```javascript
-    // ???
     // bad
     switch (foo) {
       case 1:
@@ -1997,7 +2007,7 @@ Other Style Guides
         class C {}
     }
 
-    // good
+    // good 如果有声明，就使用大括号括起来
     switch (foo) {
       case 1: {
         let x = 1;
@@ -2320,14 +2330,14 @@ Other Style Guides
     ```
 
   <a name="whitespace--around-keywords"></a><a name="18.3"></a>
-  - [18.3](#whitespace--around-keywords) 在控制语句（`if`、`while` 等）的小括号前放一个空格。在函数调用及声明中，不在函数的参数列表前加空格。
+  - [18.3](#whitespace--around-keywords) 在控制语句（`if`、`while` 等）的小括号前放一个空格。在函数调用及声明时，函数名与参数列表之间不要空格[7.11](#functions--signature-spacing)。
   eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html)
   jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
 
     ```javascript
     // bad
     if(isJedi) {
-      fight ();
+      fight();
     }
 
     // good
@@ -2660,7 +2670,7 @@ Other Style Guides
 
     > 为什么? 这会让 git diffs 更干净。另外，像 babel 这样的转译器会移除结尾多余的逗号，也就是说你不必担心老旧浏览器的[尾逗号问题](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas)。
 
-    ```javascript
+    ```diff
     // bad - git diff without trailing comma
     const hero = {
          firstName: 'Florence',
@@ -2812,7 +2822,7 @@ Other Style Guides
     ```
 
   <a name="coercion--numbers"></a><a name="21.3"></a>
-  - [21.3](#coercion--numbers) 处理数字：使用 `Number` 转换数字类型，而使用 `parseInt` 转换时，总是带着类型转换的基数。
+  - [21.3](#coercion--numbers) 处理数字：使用 `Number` 转换数字类型。如果要使用 `parseInt` 转换，就总是带着类型转换的基数。
   eslint: [`radix`](http://eslint.org/docs/rules/radix)
 
     ```javascript
@@ -2850,7 +2860,7 @@ Other Style Guides
     ```
 
   <a name="coercion--bitwise"></a><a name="21.5"></a>
-  - [21.5](#coercion--bitwise) NOTE: 小心使用位操作运算符。数字会被当成 [64 位值](http://es5.github.io/#x4.3.19)，但是位操作运算符总是返回 32 位的整数（[参考](http://es5.github.io/#x11.7)）。位操作处理大于 32 位的整数值时还会导致意料之外的行为。[关于这个问题的讨论](https://github.com/airbnb/javascript/issues/109)。最大的 32 位整数是 2,147,483,647：
+  - [21.5](#coercion--bitwise) NOTE: 使用位操作运算符要特别小心。数字会被当成 [64 位值](http://es5.github.io/#x4.3.19)，但是位操作运算符总是返回 32 位的整数（[参考](http://es5.github.io/#x11.7)）。位操作处理大于 32 位的整数值时还会导致意料之外的行为。[关于这个问题的讨论](https://github.com/airbnb/javascript/issues/109)。最大的 32 位整数是 2,147,483,647：
 
     ```javascript
     2147483647 >> 0; // => 2147483647
