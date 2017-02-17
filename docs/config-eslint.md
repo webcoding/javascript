@@ -101,13 +101,13 @@ Preferences => Open Config Folder => 找到组件  packages/linter-eslint
 参看插件源码: https://github.com/Microsoft/vscode-eslint
 ```
 
-NOTE：不要修改配置 `"eslint.autoFixOnSave": false,`，否则开启修复功能，可能会导致意料外的修复发生，最好手动处理，而针对简单文件，可以绑定快捷键调用此功能。
+NOTE：不要修改配置 `"eslint.autoFixOnSave": false,`，如果开启此修复功能，可能会导致意料外的修复发生（自动修复会修复整个文件，低级问题自动修复没问题，但我目前不太相信高级的修复，它能处理好），所以建议手动处理，而针对简单文件，可以绑定快捷键调用此功能。
 
 绑定快捷键到 `eslint.executeAutofix` 可以调用自动修复（Fix all auto-fixable problems），示例如下：
 
 ```
+// 绑定为不常用的快捷键，避免误修复，同时可以单手操作的快捷键
 // eslint 发布内容tab 有个命令列表，快捷键就可以绑定到对应的命令上
-// 使用不太可能常用的快捷键，避免误修复，同时可以单手操作的快捷键
 {
   "key": "ctrl+alt+cmd+space",
   "command": "eslint.executeAutofix",
