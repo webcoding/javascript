@@ -19,6 +19,7 @@ NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascr
   - 空白行使用一次最多连续两行
   - 禁止未使用过的变量，但设置为不检查参数 "no-unused-vars": ["error", { "args": "none" }],
   - 箭头函数的参数使用圆括号，但参数只有一个时，可以省略圆括号，但若函数体在指令块中则必须写圆括号
+  - webpack2 打包限制，可以在js文件中混用require和export，但是不能混用import和module.exports。
 
 该文档保留了部分还属于 ES5 范畴的注意内容，由 old: ES5 标记。
 
