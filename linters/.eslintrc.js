@@ -99,7 +99,7 @@ module.exports = {
       // impliedStric
       // "impliedStrict": true,
       // 启用 JSX
-      // "jsx": true
+      "jsx": true,
       // lambda表达式
       "arrowFunctions": true,
       // 块级作用域，允许使用let const

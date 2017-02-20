@@ -119,6 +119,8 @@ NOTE: 目前(20170216) VSCode 的提示不允许外链，所以 eslint 插件的
 
 ### 其他配置及使用
 
+**编辑器快捷加载项目**
+
 推荐使用 [zsh](http://ohmyz.sh/)，配合插件[z](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/z)实现跟踪/跳转你最常用的目录，配置 plugins=(z)即可。
 
 如此，想要打开一个项目 protest，直接如下即可
@@ -131,4 +133,38 @@ NOTE: 目前(20170216) VSCode 的提示不允许外链，所以 eslint 插件的
 # code .
 ```
 
+**同步配置**
+
 推荐安装 Settings Sync 插件，同步自己的配置到云端。
+
+**Code Runner**
+
+使用 Code Runner 插件，支持右键运行代码（使用 node），由于有些新的语法，即使最新版的 node 也不支持，需要借助 babel-cli 以及如下插件来实现。
+
+babel-cli 工具自带一个 babel-node 命令，提供一个支持ES6的REPL环境。它支持Node的REPL环境的所有功能，而且可以直接运行ES6代码。而配合 babel-preset-stage-0 则可以直接支持 ES2017
+
+Code Runner 配置如下：
+
+```
+"code-runner.executorMap": {
+  "javascript": "babel-node --presets stage-0"
+}
+
+NOTE: babel-preset-stage-0 必须要安装到项目目录才可以被引用，安装全局是不行的。
+```
+
+其他插件参考:
+
+```
+# ES2015转码规则
+$ npm install --save-dev babel-preset-es2015
+
+# react转码规则
+$ npm install --save-dev babel-preset-react
+
+# ES7不同阶段语法提案的转码规则（共有4个阶段），选装一个
+$ npm install --save-dev babel-preset-stage-0
+$ npm install --save-dev babel-preset-stage-1
+$ npm install --save-dev babel-preset-stage-2
+$ npm install --save-dev babel-preset-stage-3
+```

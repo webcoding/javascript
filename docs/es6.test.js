@@ -37,6 +37,20 @@ console.log(type122[0], type122[0])
 
 
 // [函数](#functions)
+(function anonymous() {
+  // bad
+  const original = { a: 1, b: 2 }
+  const copy = Object.assign({}, original, { c: 3 })
+  console.log(copy)
+})()
+
+(function anonymous() {
+  // bad
+  const original = { a: 1, b: 2 }
+  const copy = { ...original, c: 3 }
+  // const { ...copy } = original
+  console.log(copy)
+})()
 
 
 // [箭头函数](#arrow-functions)

@@ -6,7 +6,18 @@
 
 翻译自 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 。
 
-NOTE: 本文对[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 略有调整具体如下，
+NOTE: Airbnb 规则非常超前，在编译时，ES6无法完全支持，如对象扩展运算符是 ES2017 引入的，此时，需要使用 [stage-0](http://www.cnblogs.com/chris-oil/p/5717544.html) 等设置来支持，另外使用规范时注意以下部分略有调整。
+
+```
+// 使用右键 Run Code 时，有些语法是不支持的，这是因为 node 的环境还不支持
+// 此时可以使用 babel-node 加载 babel-preset-stage-0 来获得对新语法的支持
+
+"code-runner.executorMap": {
+  "javascript": "babel-node --presets stage-0"
+}
+
+NOTE: babel-preset-stage-0 必须要安装到项目目录才可以被引用，安装全局是不行的。
+```
 
 - 尾逗号单行不要有，多行必须有。修改规则 `comma-dangle: ['error', 'never']` 中 never 改为 always-multiline。
 - 行尾不要分号。调整后，代码更干净、整洁，但要注意 (, [, + , -, or ` 开头的语句，可能在“自动分号插入”机制（ASI）下会有问题。<br>
@@ -352,7 +363,9 @@ Other Style Guides
   <a name="objects--rest-spread"></a>
   - [3.8](#objects--rest-spread) 浅拷贝使用对象扩展符（rest operator）更好，相对于方法 [`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 而言。
 
-    ???: 可以深拷贝么?
+    NOTE: Object.assign 实行的是浅拷贝，而不是深拷贝。其拷贝的属性是有限制的，只拷贝源对象的自身属性（不拷贝继承属性），也不拷贝不可枚举的属性（enumerable: false）。
+
+    扩展运算符可以深拷贝么？可以。
 
     ```javascript
     // very bad
